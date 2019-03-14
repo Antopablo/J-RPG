@@ -10,6 +10,7 @@ namespace J_RPG
     {
         static void Main(string[] args)
         {
+            Console.SetWindowSize(50, 15);
         }
     }
 }
