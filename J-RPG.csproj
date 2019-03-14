@@ -43,6 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Archer.cs" />
+    <Compile Include="Assassin.cs" />
+    <Compile Include="Chaman.cs" />
+    <Compile Include="Chevalier.cs" />
+    <Compile Include="Guerrier.cs" />
+    <Compile Include="Mage.cs" />
+    <Compile Include="Personnage.cs" />
+    <Compile Include="Pretre.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
