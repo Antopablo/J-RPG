@@ -16,6 +16,9 @@ namespace J_RPG
             base.Resistance -= 5;
             base.Vitesse += 10;
             base.PvMax -= 10;
+
+            Console.WriteLine(ToString());
+            base.DessinerPersonnage("assassin");
         }
 
         public override string ToString()

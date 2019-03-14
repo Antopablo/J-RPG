@@ -16,6 +16,10 @@ namespace J_RPG
             base.Resistance += 5;
             base.Vitesse -= 5;
             base.PvMax += 30;
+
+            Console.WriteLine(ToString());
+            base.DessinerPersonnage("chevalier");
+            
         }
 
         public override string ToString()

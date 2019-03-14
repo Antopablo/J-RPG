@@ -16,6 +16,9 @@ namespace J_RPG
             base.Resistance += 0;
             base.Vitesse -= 5;
             base.PvMax -= 20;
+
+            Console.WriteLine(ToString());
+            base.DessinerPersonnage("mage");
         }
 
         public override string ToString()
