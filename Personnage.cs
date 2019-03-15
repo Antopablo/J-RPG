@@ -467,5 +467,13 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
             }
         }
 
+        protected void Attaquer()
+        {
+        }
+
+        protected void PrendrePotion()
+        {
+        }
+
     }
 }

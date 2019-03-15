@@ -47,6 +47,7 @@
     <Compile Include="Assassin.cs" />
     <Compile Include="Chaman.cs" />
     <Compile Include="Chevalier.cs" />
+    <Compile Include="FabriquePersonnage.cs" />
     <Compile Include="Guerrier.cs" />
     <Compile Include="Mage.cs" />
     <Compile Include="Personnage.cs" />

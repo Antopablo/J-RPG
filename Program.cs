@@ -11,29 +11,17 @@ namespace J_RPG
         static void Main(string[] args)
         {
             Console.SetWindowSize(80, 41);
+            Console.OutputEncoding = Encoding.GetEncoding("iso8859-1");
             Console.Title = "Jeu de OUF";
-            
 
-            Guerrier perso = new Guerrier("Anto");
-            
+            FabriquePersonnage fabrique = new FabriquePersonnage();
+            int UserChoiceINT;
 
-            Chaman perso2 = new Chaman("toto");
-            
-
-            Pretre perso3 = new Pretre("titi");
-            
-
-            Archer perso4 = new Archer("tutu");
-            
-
-            Assassin perso5 = new Assassin("tata");
-            
-
-            Chevalier perso6 = new Chevalier("zozo");
-            
-
-            Mage perso7 = new Mage("zouzou");
-            
+            Console.WriteLine("Quel perso créer \n1) Chevalier \n2) Mage \n3) Assassin \n4) Archer \n5) Chaman \n6) Pretre \n7) Guerrier");
+            UserChoiceINT = (Int32.Parse(Console.ReadLine()));
+            Console.WriteLine("Quel est son nom");
+            string nomPerso = Console.ReadLine();
+            Console.WriteLine(fabrique.CreerPerso(UserChoiceINT, nomPerso));
         }
     }
 }

@@ -17,7 +17,7 @@ namespace J_RPG
             base.Vitesse += 10;
             base.PvMax -= 10;
 
-            Console.WriteLine(ToString());
+            
             base.DessinerPersonnage("assassin");
         }
 

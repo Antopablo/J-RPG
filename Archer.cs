@@ -17,7 +17,7 @@ namespace J_RPG
             base.Vitesse += 5;
             base.PvMax += 10;
 
-            Console.WriteLine(ToString());
+            
             base.DessinerPersonnage("archer");
         }
 
