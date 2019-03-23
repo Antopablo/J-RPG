@@ -475,5 +475,17 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
         {
         }
 
+        protected void Deplacement(char s)
+        {
+            switch (s)
+            {
+                case 'z':
+                    Console.SetCursorPosition(0, 1);
+                    break;
+            
+                
+            }
+        }
+
     }
 }

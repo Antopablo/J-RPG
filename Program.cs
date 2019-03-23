@@ -22,6 +22,15 @@ namespace J_RPG
             Console.WriteLine("Quel est son nom");
             string nomPerso = Console.ReadLine();
             Console.WriteLine(fabrique.CreerPerso(UserChoiceINT, nomPerso));
+
+            bool fofo = true;
+            while (fofo == true)
+            {
+                if (Console.ReadKey(true).KeyChar == 'z')
+                {
+                    Console.SetCursorPosition(0,+1);
+                }
+            }
         }
     }
 }
