@@ -467,20 +467,21 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
             }
         }
 
-        protected void Attaquer()
+        public void Attaquer()
         {
         }
 
-        protected void PrendrePotion()
+        public void PrendrePotion()
         {
         }
 
-        protected void Deplacement(char s)
+        public void Deplacement(char s)
         {
             switch (s)
             {
                 case 'z':
                     Console.SetCursorPosition(0, 1);
+                    
                     break;
             
                 

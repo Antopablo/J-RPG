@@ -10,7 +10,16 @@ namespace J_RPG
     {
         public FabriquePersonnage()
         {
+            ListePersonnage = new List<Personnage>();
         }
+
+        private List<Personnage> _ListePersonnage;
+        public List<Personnage> ListePersonnage 
+        {
+            get { return _ListePersonnage; }
+            set { _ListePersonnage = value; }
+        }
+
 
         public Personnage CreerPerso (int quelperso, string nom)
         {

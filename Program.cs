@@ -17,18 +17,22 @@ namespace J_RPG
             FabriquePersonnage fabrique = new FabriquePersonnage();
             int UserChoiceINT;
 
-            Console.WriteLine("Quel perso créer \n1) Chevalier \n2) Mage \n3) Assassin \n4) Archer \n5) Chaman \n6) Pretre \n7) Guerrier");
+            Console.WriteLine("Quel perso créer \n1) Chevalier \n2) Mage \n3) Assassin \n4) Archer \n5) Chaman \n6) Pretre \n7) Guerrier \n8) STOP");
             UserChoiceINT = (Int32.Parse(Console.ReadLine()));
-            Console.WriteLine("Quel est son nom");
-            string nomPerso = Console.ReadLine();
-            Console.WriteLine(fabrique.CreerPerso(UserChoiceINT, nomPerso));
+            if (UserChoiceINT != 8)
+            {
+                Console.WriteLine("Quel est son nom");
+                string nomPerso = Console.ReadLine();
+                Console.WriteLine(fabrique.CreerPerso(UserChoiceINT, nomPerso));
+            }
+            
 
             bool fofo = true;
             while (fofo == true)
             {
                 if (Console.ReadKey(true).KeyChar == 'z')
                 {
-                    Console.SetCursorPosition(0,+1);
+                    fabrique.ListePersonnage[0].Deplacement('z');
                 }
             }
         }
