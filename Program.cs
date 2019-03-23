@@ -19,22 +19,40 @@ namespace J_RPG
 
             Console.WriteLine("Quel perso créer \n1) Chevalier \n2) Mage \n3) Assassin \n4) Archer \n5) Chaman \n6) Pretre \n7) Guerrier \n8) STOP");
             UserChoiceINT = (Int32.Parse(Console.ReadLine()));
-            if (UserChoiceINT != 8)
+            if (UserChoiceINT != 8 && UserChoiceINT < 8)
             {
                 Console.WriteLine("Quel est son nom");
                 string nomPerso = Console.ReadLine();
                 Console.WriteLine(fabrique.CreerPerso(UserChoiceINT, nomPerso));
             }
-            
 
-            bool fofo = true;
-            while (fofo == true)
-            {
-                if (Console.ReadKey(true).KeyChar == 'z')
+
+             bool fofo = true;
+             while (fofo == true)
+             {
+                 if (Console.ReadKey(true).KeyChar == 'z')
+                 {
+                     fabrique.ListePersonnage[0].Deplacement('z');
+
+                 }
+                else if (Console.ReadKey(true).KeyChar == 's')
                 {
-                    fabrique.ListePersonnage[0].Deplacement('z');
+                    fabrique.ListePersonnage[0].Deplacement('s');
+
+                }
+                else if (Console.ReadKey(true).KeyChar == 'q')
+                {
+                    fabrique.ListePersonnage[0].Deplacement('q');
+
+                }
+                else if (Console.ReadKey(true).KeyChar == 'd')
+                {
+                    fabrique.ListePersonnage[0].Deplacement('d');
+
                 }
             }
+
+            
         }
     }
 }

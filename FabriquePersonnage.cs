@@ -28,24 +28,31 @@ namespace J_RPG
             {
                 case 1:
                     perso = new Chevalier(nom);
+                    ListePersonnage.Add(perso);
                     break;
                 case 2:
                     perso = new Mage(nom);
+                    ListePersonnage.Add(perso);
                     break;
                 case 3:
                     perso = new Assassin(nom);
+                    ListePersonnage.Add(perso);
                     break;
                 case 4:
                     perso = new Archer(nom);
+                    ListePersonnage.Add(perso);
                     break;
                 case 5:
                     perso = new Chaman(nom);
+                    ListePersonnage.Add(perso);
                     break;
                 case 6:
                     perso = new Pretre(nom);
+                    ListePersonnage.Add(perso);
                     break;
                 case 7:
                     perso = new Guerrier(nom);
+                    ListePersonnage.Add(perso);
                     break; 
             }
             return perso;

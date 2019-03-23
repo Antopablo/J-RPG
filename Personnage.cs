@@ -480,11 +480,17 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
             switch (s)
             {
                 case 'z':
-                    Console.SetCursorPosition(0, 1);
-                    
+                    Console.SetCursorPosition(Console.CursorLeft, (Console.CursorTop-1));
                     break;
-            
-                
+                case 's':
+                    Console.SetCursorPosition(Console.CursorLeft, (Console.CursorTop + 1));
+                    break;
+                case 'q':
+                    Console.SetCursorPosition((Console.CursorLeft - 1),Console.CursorTop);
+                    break;
+                case 'd':
+                    Console.SetCursorPosition((Console.CursorLeft + 1),Console.CursorTop);
+                    break;
             }
         }
 
