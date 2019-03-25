@@ -13,6 +13,7 @@ namespace J_RPG
             Console.SetWindowSize(80, 41);
             Console.OutputEncoding = Encoding.GetEncoding("iso8859-1");
             Console.Title = "Jeu de OUF";
+            Console.CursorVisible = true;
 
             FabriquePersonnage fabrique = new FabriquePersonnage();
             int UserChoiceINT;
