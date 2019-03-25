@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Json;
 
 namespace J_RPG
 {
@@ -10,8 +12,42 @@ namespace J_RPG
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Console.OutputEncoding);
-            Console.ReadKey();
+            ConsoleKeyInfo consoleKey;
+            int consoleWidth = 81;
+            int consoleHeight = 41;
+            Console.SetWindowSize(1, 1);
+            Console.SetBufferSize(200 + consoleWidth, 100 + consoleHeight);
+            Console.SetWindowSize(consoleWidth, consoleHeight);
+
+            char[,] test = new char[201, 101];
+            for (int j = 0; j < test.GetLength(1); j++)
+            {
+                for (int i = 0; i < test.GetLength(0); i++)
+                {
+                    test[i, j] = ((j + 1)%2 == 1) ? '-' : '°';
+                }
+            }
+            
+            StringBuilder mapStringBuilder = new StringBuilder();
+            for (int j = 0; j < Console.BufferHeight; j++)
+            {
+                for (int i = 0; i < Console.BufferWidth; i++)
+                {
+                    if (!(i < consoleWidth / 2) && (i < Console.BufferWidth - consoleWidth / 2) && (!(j < consoleHeight / 2) && (j < Console.BufferHeight - consoleHeight / 2)))
+                    {
+                        mapStringBuilder.Append(test[i - (consoleWidth / 2), j - (consoleHeight / 2)]);
+                    }
+                    else
+                    {
+                        if (!(i == Console.BufferWidth - 1 && j == Console.BufferHeight - 1))
+                        {
+                            mapStringBuilder.Append(' ');
+                        }
+                    }
+                }
+            }
+
+            Console.Write(mapStringBuilder.ToString());
             /*
             for (int i = 0; i < 65535; i++)
             {
@@ -21,7 +57,6 @@ namespace J_RPG
                     Console.WriteLine();
                 }
             }
-            */
             for (int i = 0; i < 65535; i++)
             {
                 Console.Write("{0, 4:x4} : {1, -2}", i, Convert.ToChar(i));
@@ -43,39 +78,35 @@ namespace J_RPG
             Console.WriteLine("   {0}", s);
             Console.ReadKey();
             Console.Clear();
-            int consoleWidth = 81;
-            int consoleHeight = 41;
-            ConsoleKeyInfo consoleKey;
-            Console.SetWindowSize(1, 1);
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetBufferSize(200 + consoleWidth, 100 + consoleHeight);
-            Console.SetWindowSize(consoleWidth, consoleHeight);
-            //            Console.SetWindowSize(consoleWidth, consoleHeight);
-            //            Console.WriteLine("BufferHeight : {0}", Console.BufferHeight);
-            //            Console.WriteLine("BufferWidth  : {0}", Console.BufferWidth);
-            //            Console.WriteLine("WindowsTop   : {0}", Console.WindowTop);
-            //            Console.WriteLine("WindowsLeft  : {0}", Console.WindowLeft);
-            //            Console.ReadKey();
-            //            Console.Clear();
-            //            Console.SetWindowSize(1, 1);
-            for (int i = 0 + consoleHeight / 2; i < Console.BufferHeight - consoleHeight / 2; i++)
+            */
+
+            //Console.BackgroundColor = ConsoleColor.Black;
+            //Console.ForegroundColor = ConsoleColor.Red;
+            /*
+            for (int j = 0 + consoleHeight / 2; j < Console.BufferHeight - consoleHeight / 2; j++)
             {
-                for (int j = 0 + consoleWidth / 2; j < Console.BufferWidth - consoleWidth / 2; j++)
+                for (int i = 0 + consoleWidth / 2; i < Console.BufferWidth - consoleWidth / 2; i++)
                 {
-                    if (j % 2 < 1 && i % 2 < 1)
-                    {
-                        Console.SetCursorPosition(j, i);
-                        Console.ForegroundColor = (ConsoleColor)SingletonRandom.Instance.Next(0, Enum.GetValues(typeof(ConsoleColor)).Length);
-                        Console.BackgroundColor = (ConsoleColor)SingletonRandom.Instance.Next(0, Enum.GetValues(typeof(ConsoleColor)).Length);
-                        //Console.Write("\u0471");
-                        Console.Write("\u24c8");
-                    }
+                    Console.SetCursorPosition(i, j);
+                    Console.Write(test[i - consoleWidth / 2, j - consoleHeight / 2]);
+                    
+                    //if (j % 2 < 1 && i % 2 < 1)
+                    //{
+                    //    Console.SetCursorPosition(j, i);
+                        //Console.ForegroundColor = (ConsoleColor)SingletonRandom.Instance.Next(0, Enum.GetValues(typeof(ConsoleColor)).Length);
+                        //Console.BackgroundColor = (ConsoleColor)SingletonRandom.Instance.Next(0, Enum.GetValues(typeof(ConsoleColor)).Length);
+                    //    Console.Write(test[i - consoleHeight / 2, j - consoleWidth / 2]);
+                        //Console.Write("\u24c8");
+                    //}
+                    
                 }
             }
+            */
             Console.SetWindowPosition((Console.BufferWidth - Console.WindowWidth) / 2, (Console.BufferHeight - Console.WindowHeight) / 2);
             Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-            Console.CursorVisible = true;
+            Console.Write("@");
+            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+            Console.CursorVisible = false;
             do
             {
                 consoleKey = Console.ReadKey(true);
@@ -84,28 +115,44 @@ namespace J_RPG
                     case ConsoleKey.LeftArrow:
                         if (Console.WindowLeft > 0)
                         {
+                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
+                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                             Console.SetWindowPosition(Console.WindowLeft - 1, Console.WindowTop);
+                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            Console.Write("@");
                             Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                         }
                         break;
                     case ConsoleKey.UpArrow:
                         if (Console.WindowTop > 0)
                         {
+                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
+                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                             Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop - 1);
+                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            Console.Write("@");
                             Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                         }
                         break;
                     case ConsoleKey.RightArrow:
                         if (Console.WindowLeft < (Console.BufferWidth - Console.WindowWidth))
                         {
+                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
+                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                             Console.SetWindowPosition(Console.WindowLeft + 1, Console.WindowTop);
+                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            Console.Write("@");
                             Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                         }
                         break;
                     case ConsoleKey.DownArrow:
                         if (Console.WindowTop < (Console.BufferHeight - Console.WindowHeight))
                         {
+                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
+                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                             Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop + 1);
+                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            Console.Write("@");
                             Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
                         }
                         break;
