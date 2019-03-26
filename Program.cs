@@ -12,6 +12,7 @@ namespace J_RPG
     {
         static void Main(string[] args)
         {
+            
             ConsoleKeyInfo consoleKey;
             int consoleWidth = 81;
             int consoleHeight = 41;
@@ -100,7 +101,10 @@ namespace J_RPG
                         break;
                 }
             }
-            while (consoleKey.Key != ConsoleKey.Escape);  
+            while (consoleKey.Key != ConsoleKey.Escape);
+
+          
+          
         }
     }
 }
