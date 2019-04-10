@@ -21,36 +21,37 @@ namespace J_RPG
         }
 
 
-        public Personnage CreerPerso (int quelperso, string nom)
+        public Personnage CreerPerso (string quelperso, string nom)
         {
             Personnage perso = null;
             switch (quelperso)
             {
-                case 1:
+                case "chevalier":
                     perso = new Chevalier(nom);
                     ListePersonnage.Add(perso);
                     break;
-                case 2:
+                case "mage":
                     perso = new Mage(nom);
                     ListePersonnage.Add(perso);
+                    Console.WriteLine(perso);
                     break;
-                case 3:
+                case "assassin":
                     perso = new Assassin(nom);
                     ListePersonnage.Add(perso);
                     break;
-                case 4:
+                case "archer":
                     perso = new Archer(nom);
                     ListePersonnage.Add(perso);
                     break;
-                case 5:
+                case "chaman":
                     perso = new Chaman(nom);
                     ListePersonnage.Add(perso);
                     break;
-                case 6:
+                case "pretre":
                     perso = new Pretre(nom);
                     ListePersonnage.Add(perso);
                     break;
-                case 7:
+                case "guerrier":
                     perso = new Guerrier(nom);
                     ListePersonnage.Add(perso);
                     break; 

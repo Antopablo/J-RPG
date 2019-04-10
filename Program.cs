@@ -12,7 +12,14 @@ namespace J_RPG
     {
         static void Main(string[] args)
         {
-            
+
+            FabriquePersonnage fb = new FabriquePersonnage();
+            fb.CreerPerso("mage", "Alexouille");
+            ItemEquipement baton = new ItemEquipement("Baton de feu", Stats.attaque, 50);
+            fb.ListePersonnage[0].ListeItem.Add(baton);
+            Console.WriteLine(fb.ListePersonnage[0]);
+            Console.ReadLine();
+
             ConsoleKeyInfo consoleKey;
             int consoleWidth = 81;
             int consoleHeight = 41;

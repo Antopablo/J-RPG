@@ -66,6 +66,8 @@
     <Compile Include="Chevalier.cs" />
     <Compile Include="FabriquePersonnage.cs" />
     <Compile Include="Guerrier.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="ItemEquipement.cs" />
     <Compile Include="Mage.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Personnage.cs" />

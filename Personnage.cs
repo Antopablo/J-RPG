@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    abstract public class Personnage
+     public class Personnage
     {
+        private List<Item> _ListeItem;
+        public List<Item> ListeItem
+        {
+            get { return _ListeItem; }
+            set { _ListeItem = value; }
+        }
+
+
         private string _nom;
         public string Nom
         {
@@ -32,7 +40,7 @@ namespace J_RPG
         private int _attaque;
         public int Attaque
         {
-            get { return _attaque; }
+            get { return _attaque + GetBonus(Stats.attaque); }
             set { _attaque = value; }
         }
 
@@ -79,6 +87,7 @@ namespace J_RPG
             _magie = 10;
             _resistance = 10;
             _vitesse = 10;
+            _ListeItem = new List<Item>();
         }
 
 
@@ -492,6 +501,20 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
                     Console.SetCursorPosition((Console.CursorLeft + 1),Console.CursorTop);
                     break;
             }
+        }
+
+        private int GetBonus(Stats nomCarac)
+        {
+            int bonus = 0;
+            foreach (Item item in _ListeItem)
+            {
+                if (item.NomStat == nomCarac)
+                {
+                    bonus += item.Bonus;
+                }
+            }
+
+            return bonus;
         }
 
     }
