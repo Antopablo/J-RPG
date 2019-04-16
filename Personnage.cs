@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-     public class Personnage
+     class Personnage
     {
         private List<Item> _ListeItem;
         public List<Item> ListeItem

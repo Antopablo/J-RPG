@@ -14,7 +14,7 @@ namespace J_RPG
         pv
     }
 
-    public class Item
+    class Item
     {
         private string _nom;
         public string Nom
@@ -37,7 +37,7 @@ namespace J_RPG
             set { _bonus = value; }
         }
 
-        public Item (string nom, Stats nomStat, int bonus)
+        public Item(string nom, Stats nomStat, int bonus)
         {
             Nom = nom;
             NomStat = nomStat;
