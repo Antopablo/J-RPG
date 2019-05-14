@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
 namespace J_RPG
@@ -12,22 +13,81 @@ namespace J_RPG
     {
         static void Main(string[] args)
         {
-            ConsoleKeyInfo consoleKey;
-            int consoleWidth = 81;
-            int consoleHeight = 41;
+            Console.OutputEncoding = Encoding.UTF8;
             Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(200 + consoleWidth, 100 + consoleHeight);
+            int consoleWidth = 101;
+            int consoleHeight = 51;
+            Console.SetBufferSize(500 + consoleWidth, 180 + consoleHeight);
             Console.SetWindowSize(consoleWidth, consoleHeight);
+            ConsoleKeyInfo consoleKey;
 
-            char[,] test = new char[201, 101];
-            for (int j = 0; j < test.GetLength(1); j++)
+            bool wallsCollision;
+
+            char[] walls = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬' };
+
+            char[][] worldMap = new char[501][];
+            for (int i = 0; i < worldMap.GetLength(0); i++)
             {
-                for (int i = 0; i < test.GetLength(0); i++)
-                {
-                    test[i, j] = ((j + 1)%2 == 1) ? '-' : '°';
-                }
+                worldMap[i] = new char[181];
             }
-            
+
+            string path = @"..\..\Maps\";
+            DataContractJsonSerializer dataContractJsonSerializer;
+            Stream stream = new StreamReader(path + "WorldMap.json").BaseStream;
+            dataContractJsonSerializer = new DataContractJsonSerializer(typeof(char[][]));
+            worldMap = (char[][])dataContractJsonSerializer.ReadObject(stream);
+            stream.Close();
+
+            //for (int j = 99; j > 80; j--)
+            //{
+            //    for (int i = 232; i < 269; i++)
+            //    {
+            //        test[i][j] = test[i][j - 1];
+            //        test[i][j - 1] = test[231][100];
+            //    }
+            //}
+
+            //for (int j = 0; j < test[0].Length; j++)
+            //{
+            //    for (int i = 0; i < test.Length; i++)
+            //    {
+            //        if (test[i][j] == '-')
+            //        {
+            //            test[i][j] = test[7][3];
+            //        }
+            //        if (test[i][j] == ':')
+            //        {
+            //            test[i][j] = test[6][4];
+            //        }
+            //        if (test[i][j] == '$')
+            //        {
+            //            test[i][j] = test[43][1];
+            //        }
+            //    }
+            //}
+
+            //string line = "";
+            //int compteur = 0;
+            //StreamReader rStream = new StreamReader(path + "map.txt");
+            //while (line != null)
+            //{
+            //    line = rStream.ReadLine();
+            //    if (line != null)
+            //    {
+            //        for (int i = 0; i < line.Length; i++)
+            //        {
+            //            test[i][compteur] = line[i];
+            //        }
+            //        compteur++;
+            //    }
+            //}
+
+            //path = @"..\..\Maps\";
+            //stream = new StreamWriter(path + "WorldMap.json").BaseStream;
+            //dataContractJsonSerializer = new DataContractJsonSerializer(typeof(char[][]));
+            //dataContractJsonSerializer.WriteObject(stream, test);
+            //stream.Close();
+
             StringBuilder mapStringBuilder = new StringBuilder();
             for (int j = 0; j < Console.BufferHeight; j++)
             {
@@ -35,7 +95,7 @@ namespace J_RPG
                 {
                     if (!(i < consoleWidth / 2) && (i < Console.BufferWidth - consoleWidth / 2) && (!(j < consoleHeight / 2) && (j < Console.BufferHeight - consoleHeight / 2)))
                     {
-                        mapStringBuilder.Append(test[i - (consoleWidth / 2), j - (consoleHeight / 2)]);
+                        mapStringBuilder.Append(worldMap[i - (consoleWidth / 2)][j - (consoleHeight / 2)]);
                     }
                     else
                     {
@@ -46,115 +106,143 @@ namespace J_RPG
                     }
                 }
             }
-
             Console.Write(mapStringBuilder.ToString());
-            /*
-            for (int i = 0; i < 65535; i++)
-            {
-                Console.Write("{0, 4:x4} : {1, -2}", i, Convert.ToChar(i));
-                if (i % 13 < 1)
-                {
-                    Console.WriteLine();
-                }
-            }
-            for (int i = 0; i < 65535; i++)
-            {
-                Console.Write("{0, 4:x4} : {1, -2}", i, Convert.ToChar(i));
-                if (i % 8 < 1)
-                {
-                    Console.WriteLine();
-                }
-            }
-            // 0021 -> 007e, 00a0 -> 0131, 0134 -> 0137, 0139 -> 013e, 0141 -> 0148, 014c -> 017e,
-            // 0180, 0189, 0191, 0192, 0197, 019a, 019f -> 01a1, 01a9, 01ab, 01ae -> 01b0, 01b6,
-            // 01c0, 01c3, 01cd -> 01dc, 01de, 01df, 01e4 -> 01ed, 01f0, 0261, 0278, 02b9, 02ba,
-            // 02bc, 02c4, 02c6, 02c8 -> 02cb, 02cd, 02da, 02dc, 0300 -> 0305, 0308, 030a, 030e,
-            // 0327, 0331, 0332, 037e, 0393, 0398, 03a3, 03a6, 03a9, 03b1, 03b2, 03b4, 03b5, 03bc,
-            // 03c0, 03c3, 03c4, 03c6, 
-            string s = "This string contains two characters " +
-                       "with codes outside the ASCII code range: " +
-                       "Pi (\u03A0) and Sigma (\u03A3) (\u03C8) (\u263A) (\u0239).";
-            Console.WriteLine("Original string:");
-            Console.WriteLine("   {0}", s);
-            Console.ReadKey();
-            Console.Clear();
-            */
 
-            //Console.BackgroundColor = ConsoleColor.Black;
-            //Console.ForegroundColor = ConsoleColor.Red;
-            /*
-            for (int j = 0 + consoleHeight / 2; j < Console.BufferHeight - consoleHeight / 2; j++)
-            {
-                for (int i = 0 + consoleWidth / 2; i < Console.BufferWidth - consoleWidth / 2; i++)
-                {
-                    Console.SetCursorPosition(i, j);
-                    Console.Write(test[i - consoleWidth / 2, j - consoleHeight / 2]);
-                    
-                    //if (j % 2 < 1 && i % 2 < 1)
-                    //{
-                    //    Console.SetCursorPosition(j, i);
-                        //Console.ForegroundColor = (ConsoleColor)SingletonRandom.Instance.Next(0, Enum.GetValues(typeof(ConsoleColor)).Length);
-                        //Console.BackgroundColor = (ConsoleColor)SingletonRandom.Instance.Next(0, Enum.GetValues(typeof(ConsoleColor)).Length);
-                    //    Console.Write(test[i - consoleHeight / 2, j - consoleWidth / 2]);
-                        //Console.Write("\u24c8");
-                    //}
-                    
-                }
-            }
-            */
-            Console.SetWindowPosition((Console.BufferWidth - Console.WindowWidth) / 2, (Console.BufferHeight - Console.WindowHeight) / 2);
-            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+
+            //Console.SetWindowPosition((Console.BufferWidth - Console.WindowWidth) / 2, (Console.BufferHeight - Console.WindowHeight) / 2 + 17);
+            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+            Console.SetCursorPosition(Console.BufferWidth / 2, Console.BufferHeight / 2 + 17);
+            Console.SetWindowPosition(Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2);
             Console.Write("@");
             Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
             Console.CursorVisible = false;
             do
             {
+                int actualLeftCursor = Console.CursorLeft;
+                int actualTopCursor = Console.CursorTop;
+                wallsCollision = false;
                 consoleKey = Console.ReadKey(true);
                 switch (consoleKey.Key)
                 {
                     case ConsoleKey.LeftArrow:
+                    //case ConsoleKey.Q:
                         if (Console.WindowLeft > 0)
                         {
-                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
-                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.SetWindowPosition(Console.WindowLeft - 1, Console.WindowTop);
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.Write("@");
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            for (int i = 0; i < walls.Length; i++)
+                            {
+                                wallsCollision = wallsCollision || (worldMap[Console.CursorLeft - 1 - Console.WindowWidth / 2][Console.CursorTop - Console.WindowHeight / 2] == walls[i]);
+                            }
+                            if (!wallsCollision)
+                            {
+                                Console.Write(worldMap[Console.CursorLeft - Console.WindowWidth / 2][Console.CursorTop - Console.WindowHeight / 2].ToString());
+                                Console.SetWindowPosition(Console.WindowLeft - 1, Console.WindowTop);
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                                Console.Write("@");
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            }
                         }
                         break;
                     case ConsoleKey.UpArrow:
+                    //case ConsoleKey.Z:
                         if (Console.WindowTop > 0)
                         {
-                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
-                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop - 1);
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.Write("@");
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            for (int i = 0; i < walls.Length; i++)
+                            {
+                                wallsCollision = wallsCollision || (worldMap[Console.CursorLeft - Console.WindowWidth / 2][Console.CursorTop - 1 - Console.WindowHeight / 2] == walls[i]);
+                            }
+                            if (!wallsCollision)
+                            {
+                                Console.Write(worldMap[Console.CursorLeft - Console.WindowWidth / 2][Console.CursorTop - Console.WindowHeight / 2].ToString());
+                                Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop - 1);
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                                Console.Write("@");
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            }
                         }
                         break;
                     case ConsoleKey.RightArrow:
+                    //case ConsoleKey.D:
                         if (Console.WindowLeft < (Console.BufferWidth - Console.WindowWidth))
                         {
-                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
-                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.SetWindowPosition(Console.WindowLeft + 1, Console.WindowTop);
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.Write("@");
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            for (int i = 0; i < walls.Length; i++)
+                            {
+                                wallsCollision = wallsCollision || (worldMap[Console.CursorLeft + 1 - Console.WindowWidth / 2][Console.CursorTop - Console.WindowHeight / 2] == walls[i]);
+                            }
+                            if (!wallsCollision)
+                            {
+                                Console.Write(worldMap[Console.CursorLeft - Console.WindowWidth / 2][Console.CursorTop - Console.WindowHeight / 2].ToString());
+                                Console.SetWindowPosition(Console.WindowLeft + 1, Console.WindowTop);
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                                Console.Write("@");
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            }
                         }
                         break;
                     case ConsoleKey.DownArrow:
+                    //case ConsoleKey.S:
                         if (Console.WindowTop < (Console.BufferHeight - Console.WindowHeight))
                         {
-                            Console.Write(test[Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2].ToString());
-                            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop + 1);
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
-                            Console.Write("@");
-                            Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            for (int i = 0; i < walls.Length; i++)
+                            {
+                                wallsCollision = wallsCollision || (worldMap[Console.CursorLeft - Console.WindowWidth / 2][Console.CursorTop + 1 - Console.WindowHeight / 2] == walls[i]);
+                            }
+                            if (!wallsCollision)
+                            {
+                                Console.Write(worldMap[Console.CursorLeft - Console.WindowWidth / 2][Console.CursorTop - Console.WindowHeight / 2].ToString());
+                                Console.SetWindowPosition(Console.WindowLeft, Console.WindowTop + 1);
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                                Console.Write("@");
+                                Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
+                            }
                         }
+                        break;
+                    case ConsoleKey.S:
+                        if ((consoleKey.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control)
+                        {
+                            path = @"..\..\Maps\";
+                            stream = new StreamWriter(path + "WorldMap.json").BaseStream;
+                            dataContractJsonSerializer = new DataContractJsonSerializer(typeof(char[][]));
+                            dataContractJsonSerializer.WriteObject(stream, worldMap);
+                            stream.Close();
+                        }
+                        else
+                        {
+                            worldMap[actualLeftCursor - Console.WindowWidth / 2][actualTopCursor - Console.WindowHeight / 2] = consoleKey.KeyChar;
+                            Console.Write(consoleKey.KeyChar);
+                        }
+                        break;
+                    case ConsoleKey.T:
+                        if ((consoleKey.Modifiers & ConsoleModifiers.Control) == ConsoleModifiers.Control)
+                        {
+                            string[] test = new string[worldMap[0].Length];
+                            for (int j = 0; j < worldMap[0].Length; j++)
+                            {
+                                string line = "";
+                                for (int i = 0; i < worldMap.Length; i++)
+                                {
+                                    line += worldMap[i][j];
+                                }
+                                test[j] = line;
+                            }
+                            string textToWrite = test[0];
+                            for (int j = 1; j < worldMap[0].Length; j++)
+                            {
+                                textToWrite += "\r\n" + test[j];
+                            }
+                            path = @"..\..\Maps\";
+                            StreamWriter streamWriter = new StreamWriter(path + "WorldMap.txt");
+                            streamWriter.Write(textToWrite);
+                            streamWriter.Close();
+                        }
+                        else
+                        {
+                            worldMap[actualLeftCursor - Console.WindowWidth / 2][actualTopCursor - Console.WindowHeight / 2] = consoleKey.KeyChar;
+                            Console.Write(consoleKey.KeyChar);
+                        }
+                        break;
+                    default:
+                        worldMap[actualLeftCursor - Console.WindowWidth / 2][actualTopCursor - Console.WindowHeight / 2] = consoleKey.KeyChar;
+                        Console.Write(consoleKey.KeyChar);
                         break;
                 }
             }
@@ -162,93 +250,6 @@ namespace J_RPG
         }
     }
 }
-/*
-using System;
-using System.Text;
-
-public class Example
-{
-    public static void Main()
-    {
-        // The encoding.
-        var enc = new UTF32Encoding();
-
-        // Create a string.
-        String s = "This string contains two characters " +
-                   "with codes outside the ASCII code range: " +
-                   "Pi (\u03A0) and Sigma (\u03A3).";
-        Console.WriteLine("Original string:");
-        Console.WriteLine("   {0}", s);
-
-        // Encode the string.
-        Byte[] encodedBytes = enc.GetBytes(s);
-        Console.WriteLine();
-        Console.WriteLine("Encoded bytes:");
-        for (int ctr = 0; ctr < encodedBytes.Length; ctr++)
-        {
-            Console.Write("[{0:X2}]{1}", encodedBytes[ctr],
-                                         (ctr + 1) % 4 == 0 ? " " : "");
-            if ((ctr + 1) % 16 == 0) Console.WriteLine();
-        }
-        Console.WriteLine();
-
-        // Decode bytes back to string.
-        // Notice Pi and Sigma characters are still present.
-        String decodedString = enc.GetString(encodedBytes);
-        Console.WriteLine();
-        Console.WriteLine("Decoded string:");
-        Console.WriteLine("   {0}", decodedString);
-    }
-}
-*/
-/*
-using System;
-using System.Text;
-
-public class Example
-{
-    public static void Main()
-    {
-        // Get an encoding for code page 1252 (Western Europe character set).
-        Encoding cp1252 = Encoding.GetEncoding(1252);
-
-        // Define and display a string.
-        string str = "\u24c8 \u2075 \u221e";
-        Console.WriteLine("Original string: " + str);
-        Console.Write("Code points in string: ");
-        foreach (var ch in str)
-            Console.Write("{0} ", Convert.ToUInt16(ch).ToString("X4"));
-
-        Console.WriteLine("\n");
-
-        // Encode a Unicode string.
-        Byte[] bytes = cp1252.GetBytes(str);
-        Console.Write("Encoded bytes: ");
-        foreach (byte byt in bytes)
-            Console.Write("{0:X2} ", byt);
-        Console.WriteLine("\n");
-
-        // Decode the string.
-        string str2 = cp1252.GetString(bytes);
-        Console.WriteLine("String round-tripped: {0}", str.Equals(str2));
-        if (!str.Equals(str2))
-        {
-            Console.WriteLine(str2);
-            foreach (var ch in str2)
-                Console.Write("{0} ", Convert.ToUInt16(ch).ToString("X4"));
-        }
-    }
-}
-*/
-// The example displays the following output:
-//       Original string: Ⓢ ⁵ ∞
-//       Code points in string: 24C8 0020 2075 0020 221E
-//       
-//       Encoded bytes: 3F 20 35 20 38
-//       
-//       String round-tripped: False
-//       ? 5 8
-//       003F 0020 0035 0020 0038
 /*
 // This example demonstrates the Console.WindowLeft and
 //                               Console.WindowTop properties.
