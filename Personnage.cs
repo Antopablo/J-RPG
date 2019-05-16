@@ -8,12 +8,20 @@ namespace J_RPG
 {
      class Personnage
     {
-        private List<Item> _ListeItem;
-        public List<Item> ListeItem
+        static private List<Item> _InventaireCommun;
+        public List<Item> InventaireCommun
         {
-            get { return _ListeItem; }
-            set { _ListeItem = value; }
+            get { return _InventaireCommun; }
+            set { _InventaireCommun = value; }
         }
+
+        private List<ItemEquipement> _Equipement;
+        public List<ItemEquipement> Equipement
+        {
+            get { return _Equipement; }
+            set { _Equipement = value; }
+        }
+
 
 
         private string _nom;
@@ -72,6 +80,16 @@ namespace J_RPG
             set { _vitesse = value; }
         }
 
+        private int _Level;
+        public int Level
+        {
+            get { return _Level; }
+            private set { _Level = value; }
+        }
+
+        public int XP { get; set; }
+
+
         private int _Pos_x_map;
         public int Pos_x
         {
@@ -117,7 +135,10 @@ namespace J_RPG
             _magie = 10;
             _resistance = 10;
             _vitesse = 10;
-            _ListeItem = new List<Item>();
+            _InventaireCommun = new List<Item>();
+            _Equipement = new List<ItemEquipement>();
+            _Level = 1;
+            XP = 0;
         }
 
 
@@ -522,7 +543,7 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
         private int GetBonus(Stats nomCarac)
         {
             int bonus = 0;
-            foreach (Item item in _ListeItem)
+            foreach (Item item in _Equipement)
             {
                 if (item.NomStat == nomCarac)
                 {

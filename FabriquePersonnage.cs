@@ -26,35 +26,44 @@ namespace J_RPG
             Personnage perso = null;
             switch (quelperso)
             {
-                case "chevalier":
+                case "CHEVALIER":
                     perso = new Chevalier(nom);
                     ListePersonnage.Add(perso);
+                    Console.WriteLine(perso);
                     break;
-                case "mage":
+                case "MAGE":
                     perso = new Mage(nom);
                     ListePersonnage.Add(perso);
                     Console.WriteLine(perso);
                     break;
-                case "assassin":
+                case "ASSASSIN":
                     perso = new Assassin(nom);
                     ListePersonnage.Add(perso);
+                    Console.WriteLine(perso);
                     break;
-                case "archer":
+                case "ARCHER":
                     perso = new Archer(nom);
                     ListePersonnage.Add(perso);
+                    Console.WriteLine(perso);
                     break;
-                case "chaman":
+                case "CHAMAN":
                     perso = new Chaman(nom);
                     ListePersonnage.Add(perso);
+                    Console.WriteLine(perso);
                     break;
-                case "pretre":
+                case "PRETRE":
                     perso = new Pretre(nom);
                     ListePersonnage.Add(perso);
+                    Console.WriteLine(perso);
                     break;
-                case "guerrier":
+                case "GUERRIER":
                     perso = new Guerrier(nom);
                     ListePersonnage.Add(perso);
-                    break; 
+                    Console.WriteLine(perso);
+                    break;
+                default:
+                    Console.WriteLine("Personnage inexistant");
+                    break;
             }
             return perso;
         }
