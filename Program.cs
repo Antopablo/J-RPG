@@ -12,7 +12,10 @@ namespace J_RPG
     {
         static void Main(string[] args)
         {
-
+            FabriquePersonnage fabriquePerso = new FabriquePersonnage();
+            fabriquePerso.CreerPerso("guerrier", "Alexis");
+            Console.WriteLine(fabriquePerso.ListePersonnage[0]);
+            Console.ReadLine();
             Console.OutputEncoding = Encoding.UTF8;
             Console.SetWindowSize(1, 1);
             int consoleWidth = 101;
@@ -38,56 +41,6 @@ namespace J_RPG
             worldMap = (char[][])dataContractJsonSerializer.ReadObject(stream);
             stream.Close();
 
-            //for (int j = 99; j > 80; j--)
-            //{
-            //    for (int i = 232; i < 269; i++)
-            //    {
-            //        test[i][j] = test[i][j - 1];
-            //        test[i][j - 1] = test[231][100];
-            //    }
-            //}
-
-            //for (int j = 0; j < test[0].Length; j++)
-            //{
-            //    for (int i = 0; i < test.Length; i++)
-            //    {
-            //        if (test[i][j] == '-')
-            //        {
-            //            test[i][j] = test[7][3];
-            //        }
-            //        if (test[i][j] == ':')
-            //        {
-            //            test[i][j] = test[6][4];
-            //        }
-            //        if (test[i][j] == '$')
-            //        {
-            //            test[i][j] = test[43][1];
-            //        }
-            //    }
-            //}
-
-            //string line = "";
-            //int compteur = 0;
-            //StreamReader rStream = new StreamReader(path + "map.txt");
-            //while (line != null)
-            //{
-            //    line = rStream.ReadLine();
-            //    if (line != null)
-            //    {
-            //        for (int i = 0; i < line.Length; i++)
-            //        {
-            //            test[i][compteur] = line[i];
-            //        }
-            //        compteur++;
-            //    }
-            //}
-
-            //path = @"..\..\Maps\";
-            //stream = new StreamWriter(path + "WorldMap.json").BaseStream;
-            //dataContractJsonSerializer = new DataContractJsonSerializer(typeof(char[][]));
-            //dataContractJsonSerializer.WriteObject(stream, test);
-            //stream.Close();
-
             StringBuilder mapStringBuilder = new StringBuilder();
             for (int j = 0; j < Console.BufferHeight; j++)
             {
@@ -109,8 +62,6 @@ namespace J_RPG
             Console.Write(mapStringBuilder.ToString());
 
 
-            //Console.SetWindowPosition((Console.BufferWidth - Console.WindowWidth) / 2, (Console.BufferHeight - Console.WindowHeight) / 2 + 17);
-            //Console.SetCursorPosition(Console.WindowLeft + Console.WindowWidth / 2, Console.WindowTop + Console.WindowHeight / 2);
             Console.SetCursorPosition(Console.BufferWidth / 2, Console.BufferHeight / 2 + 17);
             Console.SetWindowPosition(Console.CursorLeft - Console.WindowWidth / 2, Console.CursorTop - Console.WindowHeight / 2);
             Console.Write("@");

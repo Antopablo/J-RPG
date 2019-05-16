@@ -69,7 +69,7 @@
     <Compile Include="Item.cs" />
     <Compile Include="ItemEquipement.cs" />
     <Compile Include="Mage.cs" />
-    <Compile Include="Map.cs" />
+    <Compile Include="Mob.cs" />
     <Compile Include="Personnage.cs" />
     <Compile Include="Pretre.cs" />
     <Compile Include="Program.cs" />

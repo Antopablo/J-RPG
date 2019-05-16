@@ -26,14 +26,14 @@ namespace J_RPG
         private int _pvMax;
         public int PvMax
         {
-            get { return _pvMax; }
+            get { return _pvMax + GetBonus(Stats.pv); }
             set { _pvMax = value; }
         }
 
         private int _pv;
         public int PV
         {
-            get { return _pv; }
+            get { return _pv ; }
             set { _pv = value; }
         }
 
@@ -47,30 +47,60 @@ namespace J_RPG
         private int _defense;
         public int Defense
         {
-            get { return _defense; }
+            get { return _defense + GetBonus(Stats.defense); }
             set { _defense = value; }
         }
 
         private int _magie;
         public int Magie
         {
-            get { return _magie; }
+            get { return _magie + GetBonus(Stats.attaque); }
             set { _magie = value; }
         }
 
         private int _resistance;
         public int Resistance
         {
-            get { return _resistance; }
+            get { return _resistance + GetBonus(Stats.resistance); }
             set { _resistance = value; }
         }
 
         private int _vitesse;
         public int Vitesse
         {
-            get { return _vitesse; }
+            get { return _vitesse + GetBonus(Stats.vitesse); }
             set { _vitesse = value; }
         }
+
+        private int _Pos_x_map;
+        public int Pos_x
+        {
+            get { return _Pos_x_map; }
+            set { _Pos_x_map = value; }
+        }
+
+        private int _Pos_y_map;
+        public int Pos_y
+        {
+            get { return _Pos_y_map; }
+            set { _Pos_y_map = value; }
+        }
+
+        private int _Pos_x_combat;
+        public int Pos_x_combat
+        {
+            get { return _Pos_x_combat; }
+            set { _Pos_x_combat = value; }
+        }
+
+        private int _Pos_y_combat;
+        public int Pos_y_combat
+        {
+            get { return _Pos_y_combat; }
+            set { _Pos_y_combat = value; }
+        }
+
+
 
 
         public override string ToString()
@@ -476,32 +506,18 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
             }
         }
 
-        public void Attaquer()
+        public void Attaquer(Personnage Ennemi)
         {
         }
 
-        public void PrendrePotion()
+        public void SeDefendre(Personnage Ennemi)
         {
         }
 
-        public void Deplacement(char s)
+        public void PrendrePotion(Personnage Ennemi)
         {
-            switch (s)
-            {
-                case 'z':
-                    Console.SetCursorPosition(Console.CursorLeft, (Console.CursorTop-1));
-                    break;
-                case 's':
-                    Console.SetCursorPosition(Console.CursorLeft, (Console.CursorTop + 1));
-                    break;
-                case 'q':
-                    Console.SetCursorPosition((Console.CursorLeft - 1),Console.CursorTop);
-                    break;
-                case 'd':
-                    Console.SetCursorPosition((Console.CursorLeft + 1),Console.CursorTop);
-                    break;
-            }
         }
+
 
         private int GetBonus(Stats nomCarac)
         {

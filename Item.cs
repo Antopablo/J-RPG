@@ -10,6 +10,8 @@ namespace J_RPG
     {
         attaque,
         defense,
+        magie,
+        resistance,
         vitesse,
         pv
     }
