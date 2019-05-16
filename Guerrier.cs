@@ -16,9 +16,6 @@ namespace J_RPG
             base.Resistance += 0;
             base.Vitesse += 0;
             base.PvMax += 10;
-
-            
-            base.DessinerPersonnage("guerrier");
         }
 
         public override string ToString()

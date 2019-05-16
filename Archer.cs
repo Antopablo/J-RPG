@@ -16,9 +16,6 @@ namespace J_RPG
             base.Resistance -= 5;
             base.Vitesse += 5;
             base.PvMax += 10;
-
-            
-            base.DessinerPersonnage("archer");
         }
 
         public override string ToString()

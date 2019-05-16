@@ -148,7 +148,7 @@ namespace J_RPG
             switch (s)
             {
                 #region DessinMage
-                case "mage":
+                case "MAGE":
                     string DessinMage = @"                                   `.-:/oooo+:-..`                                
                                `-+ydNMMNNNMMMNmhs/-`                             
                               -+mNdhsoosssssyhmNMMmy/-`                          
@@ -201,7 +201,7 @@ namespace J_RPG
                     break;
                 #endregion
                 #region DessinChevalier
-                case "chevalier":
+                case "CHEVALIER":
                     string DessinChevalier = @"                                       `-:-:-+/-.-`                              
                                    :ohNMMN+mhoyshhsm++:-                         
                                 -sNMNmdhhyoysosyosssymhhms:                      
@@ -257,7 +257,7 @@ namespace J_RPG
                     break;
                 #endregion
                 #region DessinAssassin
-                case "assassin":
+                case "ASSASSIN":
                     string dessinAssassin = @"                               .--::::::://///:`                                 
                           -/shmNMMMMMMMMMMMMMMMMNmhyo/-                          
                      -/sdNMMMMNNNNNNmmmmmmmmmmmmNNNNMMMNh+-                      
@@ -300,7 +300,7 @@ namespace J_RPG
                     break;
                 #endregion
                 #region DessinArcher
-                case "archer":
+                case "ARCHER":
                     string dessinArcher = @"                                                                                 
                                               s                                  
                                               ds                                 
@@ -345,7 +345,7 @@ namespace J_RPG
                     break;
                 #endregion
                 #region DessinPretre
-                case "pretre":
+                case "PRETRE":
                     string dessinPretre = @"                            -:+osyhhddmNNNNmddhhyso+:.                           
                       `:oydmmmmmmmmmmmmmmmmmmmmmmmmmmmmdy+:`                     
                    :odmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmho-                  
@@ -400,7 +400,7 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
                     break;
                 #endregion
                 #region DessinChaman
-                case "chaman":
+                case "CHAMAN":
                     string dessinChaman = @"                                                                                 
                `                                                                 
              -:`    `                               -.                           
@@ -447,7 +447,7 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
                     break;
                 #endregion
                 #region DessinGuerrier
-                case "guerrier":
+                case "GUERRIER":
                     string dessinGuerrier = @"               ``                                               ``               
                ````                                           ````               
                ``````                                       ``````               
