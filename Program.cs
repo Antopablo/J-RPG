@@ -17,7 +17,6 @@ namespace J_RPG
             List<Personnage> List_Team = new List<Personnage>(); // Notre équipe de 3 perso max
             InitialiserTOUSpersonnage(List_Perso_Recrutable, fabriquePerso);
             CreerHeroPrincipale(List_Team, fabriquePerso);
-
         }
 
         static public void CreerHeroPrincipale(List<Personnage> Liste_TEAM, FabriquePersonnage fabrique)
