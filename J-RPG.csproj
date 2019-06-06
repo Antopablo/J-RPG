@@ -60,6 +60,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Archer.cs" />
     <Compile Include="Assassin.cs" />
     <Compile Include="Chaman.cs" />
@@ -72,10 +73,21 @@
     <Compile Include="Mob.cs" />
     <Compile Include="Personnage.cs" />
     <Compile Include="Pretre.cs" />
+=======
+    <Compile Include="Camera.cs" />
+    <Compile Include="ConsoleConfiguration.cs" />
+    <Compile Include="Coordinate.cs" />
+    <Compile Include="JsonFile.cs" />
+    <Compile Include="ConsoleWindowConfiguration.cs" />
+    <Compile Include="Map.cs" />
+    <Compile Include="TextFile.cs" />
+    <Compile Include="WorldMap.cs" />
+>>>>>>> feature/MoveAndMap
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quete.cs" />
     <Compile Include="SingletonRandom.cs" />
+    <Compile Include="WorldMapFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
