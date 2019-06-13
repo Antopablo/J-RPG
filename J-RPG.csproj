@@ -63,15 +63,16 @@
     <Compile Include="Camera.cs" />
     <Compile Include="ConsoleConfiguration.cs" />
     <Compile Include="Coordinate.cs" />
+    <Compile Include="Displayable.cs" />
     <Compile Include="JsonFile.cs" />
     <Compile Include="ConsoleWindowConfiguration.cs" />
-    <Compile Include="Map.cs" />
-    <Compile Include="TextFile.cs" />
     <Compile Include="WorldMap.cs" />
+    <Compile Include="MapAccess.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="TextFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SingletonRandom.cs" />
-    <Compile Include="WorldMapFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

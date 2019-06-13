@@ -27,16 +27,33 @@ namespace J_RPG
             set { _ordinate = value; }
         }
 
+        public Coordinate() { }
+
         public Coordinate(int abscissa, int ordinate)
         {
             _abscissa = abscissa;
             _ordinate = ordinate;
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    return base.Equals(obj);
-        //}
+        public override bool Equals(object obj)
+        {
+            bool isEqual;
+            if ((obj == null) || !GetType().Equals(obj.GetType()))
+            {
+                isEqual = false;
+            }
+            else
+            {
+                Coordinate coordinate = (Coordinate)obj;
+                isEqual = (_abscissa == coordinate._abscissa) && (_ordinate == coordinate._ordinate);
+            }
+            return isEqual;
+        }
+
+        public override int GetHashCode()
+        {
+            return (_abscissa << 2) ^ _ordinate;
+        }
 
         public override string ToString()
         {

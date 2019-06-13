@@ -193,18 +193,18 @@ namespace J_RPG
 
         public bool MoveNext()
         {
-            bool end;
+            bool forwarded;
             if (!_streamReader.EndOfStream)
             {
                 _line = _streamReader.ReadLine();
-                end = true;
+                forwarded = true;
             }
             else
             {
                 _line = null;
-                end = false;
+                forwarded = false;
             }
-            return end;
+            return forwarded;
         }
 
         public void Reset()
