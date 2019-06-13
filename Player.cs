@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    class Map
+    class Player : Displayable
     {
+        public Player(int abscissa, int ordinate) : base('@', abscissa, ordinate) { }
     }
 }

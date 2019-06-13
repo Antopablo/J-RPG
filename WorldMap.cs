@@ -3,104 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Json;
 
 namespace J_RPG
 {
     class WorldMap
     {
-        private string _fileName;
-
-        public string FileName
-        {
-            get { return _fileName; }
-            set { _fileName = value; }
-        }
+        public int Id { get; set; } // Pour la database
 
         private string _name;
+        public string Name { get { return _name; } set { _name = value; } } // database
 
-        public string Name
+        private string _path;
+        public string Path // database
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _path; }
+            set { _path = @""+ value; }
+        }
+
+        private string _file;
+        public string File // database
+        {
+            get { return _file; }
+            set { _file = value; }
+        }
+
+        private List<MapAccess> _mapAccesses;
+        public List<MapAccess> MapAccesses // database InverseProperty
+        {
+            get { return _mapAccesses; }
+            set { _mapAccesses = value; }
         }
 
         private List<string> _map;
 
-        public List<string> Map
+        public int Width { get { return _map[0].Length; } }
+        public int Height { get { return _map.Count; } }
+
+        public int MaxAbscissa { get { return _map[0].Length - 1; } }
+        public int MaxOrdinate { get { return _map.Count - 1; } }
+
+        public WorldMap() { }
+
+        public WorldMap(string name, string path, string file, List<MapAccess> mapAccesses)
         {
-            get { return _map; }
-            set { _map = value; }
+            Name = name;
+            Path = path;
+            File = file;
+            _map = new List<string>();
+            _mapAccesses = mapAccesses;
+            Load();
         }
 
-        private Coordinate _enter;
-
-        public Coordinate Enter
+        private void Load()
         {
-            get { return _enter; }
-            set { _enter = value; }
+            TextFile mapFile = new TextFile(_path, _file);
+            foreach (string line in mapFile)
+            {
+                _map.Add(line);
+            }
         }
 
-        private Coordinate _exit;
-
-        public Coordinate Exit
+        public List<StringBuilder> GetSubPart(int abscissa, int ordinate, int width, int height)
         {
-            get { return _exit; }
-            set { _exit = value; }
+            List<StringBuilder> subPart = new List<StringBuilder>();
+            for (int j = 0; j < height; j++)
+            {
+                subPart.Add(new StringBuilder(_map[ordinate + j].Substring(abscissa, width)));
+            }
+            return subPart;
         }
 
-        private Coordinate _lastPlayerPosition;
-
-        public Coordinate LastPlayerPosition
+        public string GetCharString(int abscissa, int ordinate)
         {
-            get { return _lastPlayerPosition; }
-            set { _lastPlayerPosition = value; }
+            return _map[ordinate][abscissa].ToString();
         }
-
-        private StringBuilder _mapString;
-
-        public StringBuilder MapString
-        {
-            get { return _mapString; }
-            set { _mapString = value; }
-        }
-
-        public WorldMap(string fileName)
-        {
-            //_mapMatrix = new string[201,101];
-        }
-
-        // private methode de construction de chaine de caractere
     }
 }
-/*
-static Dictionary<string, List<Livre>> LoadJsonFile()
-{
-    Dictionary<string, List<Livre>> inventaires;
-    string path = @"..\..\..\Test\JsonFiles\";
-    DataContractJsonSerializer dataContractJsonSerializer;
-    Stream stream = new StreamReader(path + "inventaires.json").BaseStream;
-    List<Type> types = new List<Type>();
-    types.Add(typeof(String));
-    types.Add(typeof(Livre));
-    dataContractJsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<string, List<Livre>>));
-    inventaires = (Dictionary<string, List<Livre>>)dataContractJsonSerializer.ReadObject(stream);
-    stream.Close();
-    return inventaires;
-}
-
-static void SaveJsonFile(Dictionary<string, List<Livre>> inventaires)
-{
-    string path = @"..\..\..\Test\JsonFiles\";
-    DataContractJsonSerializer dataContractJsonSerializer;
-    Stream stream = new StreamWriter(path + "inventaires.json").BaseStream;
-    List<Type> types = new List<Type>();
-    types.Add(typeof(String));
-    types.Add(typeof(Livre));
-    dataContractJsonSerializer = new DataContractJsonSerializer(typeof(Dictionary<string, List<Livre>>), types);
-    dataContractJsonSerializer.WriteObject(stream, inventaires);
-    stream.Close();
-}
-*/
