@@ -67,8 +67,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-
-
     <Compile Include="Archer.cs" />
     <Compile Include="Assassin.cs" />
     <Compile Include="Chaman.cs" />
@@ -79,11 +77,12 @@
     <Compile Include="ItemEquipement.cs" />
     <Compile Include="Mage.cs" />
     <Compile Include="Mob.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Personnage.cs" />
     <Compile Include="Pretre.cs" />
-
     <Compile Include="ApplicationDatabase.cs" />
-
     <Compile Include="Camera.cs" />
     <Compile Include="ConsoleConfiguration.cs" />
     <Compile Include="Coordinates.cs" />
@@ -101,7 +100,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\J-RPG.exe.config" />
+    <None Include="Maps\WorldMap.json" />
+    <None Include="obj\Release\J-RPG.csproj.CoreCompileInputs.cache" />
     <None Include="packages.config" />
+    <None Include="packages\EntityFramework.6.2.0\.signature.p7s" />
+    <None Include="packages\EntityFramework.6.2.0\content\net40\App.config.transform" />
+    <None Include="packages\EntityFramework.6.2.0\content\net40\Web.config.transform" />
+    <None Include="packages\EntityFramework.6.2.0\EntityFramework.6.2.0.nupkg" />
+    <None Include="packages\EntityFramework.6.2.0\tools\EntityFramework.psd1" />
+    <None Include="packages\EntityFramework.6.2.0\tools\EntityFramework.psm1" />
+    <None Include="packages\EntityFramework.6.2.0\tools\init.ps1" />
+    <None Include="packages\EntityFramework.6.2.0\tools\install.ps1" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -114,6 +124,35 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="bin\Debug\EntityFramework.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\Debug\EntityFramework.SqlServer.xml" />
+    <Content Include="bin\Debug\EntityFramework.xml" />
+    <Content Include="bin\Debug\J-RPG.exe" />
+    <Content Include="bin\Debug\J-RPG.pdb" />
+    <Content Include="bin\Debug\UTF8Encoding.txt" />
+    <Content Include="Maps\WorldMap.txt" />
+    <Content Include="Maps\WorldMap2.txt" />
+    <Content Include="Maps\WorldMap3.txt" />
+    <Content Include="Maps\WorldMap4.txt" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.xml" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.xml" />
+    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.xml" />
+    <Content Include="packages\EntityFramework.6.2.0\tools\about_EntityFramework.help.txt" />
+    <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.PowerShell.dll" />
+    <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.PowerShell.Utility.dll" />
+    <Content Include="packages\EntityFramework.6.2.0\tools\migrate.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

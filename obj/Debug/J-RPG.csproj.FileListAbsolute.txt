@@ -5,3 +5,6 @@ C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.csproj.CoreCompile
 C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.exe
 C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.pdb
 C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.csprojAssemblyReference.cache
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\bin\Debug\EntityFramework.xml
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.csproj.CopyComplete
