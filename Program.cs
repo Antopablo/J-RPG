@@ -17,31 +17,37 @@ namespace J_RPG
             ConsoleWindowConfiguration.Setup();
             ConsoleConfiguration.Setup();
 
-            Camera camera = new Camera(ConsoleConfiguration.AvailableConsoleWidth, ConsoleConfiguration.AvailableConsoleHeight);
 
-            // WorldMap.txt
-            //WorldMap map = new WorldMap("", @"..\..\Maps", "WorldMap.txt", null);
-            //Player player = new Player(250, 107);
+            // Insertion des données dans la base
 
-            // WorldMap.txt
-            //WorldMap map = new WorldMap("", @"..\..\Maps", "WorldMap2.txt", null);
-            //Player player = new Player(238, 22);
 
-            // WorldMap.txt
-            //WorldMap map = new WorldMap("", @"..\..\Maps", "WorldMap3.txt", null);
-            //Player player = new Player(49, 92);
-
-            // WorldMap.txt
-            WorldMap map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", null);
-            Player player = new Player(22, 22);
-
-            camera.Map = map;
-            camera.player = player;
-
-            char[] wallsChar = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬' , '█' };
+            char[] wallsChar = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬', '█' };
             string walls = new string(wallsChar);
 
-            Thread display = new Thread(camera.Render);
+            WorldMap map;
+            Character player;
+
+            // WorldMap.txt
+            map = new WorldMap("", @"..\..\Maps", "WorldMap.txt", walls, null);
+            player = new Character(250, 107);
+
+            // WorldMap.txt
+            //map = new WorldMap("", @"..\..\Maps", "WorldMap2.txt", walls, null);
+            //player = new Character(238, 22);
+
+            // WorldMap.txt
+            //map = new WorldMap("", @"..\..\Maps", "WorldMap3.txt", walls, null);
+            //player = new Character(49, 92);
+
+            // WorldMap.txt
+            //map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
+            //player = new Character(22, 22);
+
+            Camera camera = new Camera(ConsoleConfiguration.AvailableConsoleWidth, ConsoleConfiguration.AvailableConsoleHeight);
+            camera.NonDeMethodePourSetLaMap(map);
+            camera.Player = player;
+
+            Thread display = new Thread(camera.Run);
             display.Start();
 
             bool exit = false;
@@ -51,8 +57,6 @@ namespace J_RPG
                 {
                     lock (player)
                     {
-                        int nextAbscissa = player.Abscissa;
-                        int nextOrdinate = player.Ordinate;
                         switch (Console.ReadKey(true).Key)
                         {
                             case ConsoleKey.Escape:
@@ -60,32 +64,40 @@ namespace J_RPG
                                 break;
                             case ConsoleKey.LeftArrow:
                             case ConsoleKey.Q:
-                                nextAbscissa--;
+                                if (!map.IsWall(player.NextLeft))
+                                {
+                                    player.Left();
+                                }
                                 break;
                             case ConsoleKey.UpArrow:
                             case ConsoleKey.Z:
-                                nextOrdinate--;
+                                if (!map.IsWall(player.NextUp))
+                                {
+                                    player.Up();
+                                }
                                 break;
                             case ConsoleKey.RightArrow:
                             case ConsoleKey.D:
-                                nextAbscissa++;
+                                if (!map.IsWall(player.NextRight))
+                                {
+                                    player.Right();
+                                }
                                 break;
                             case ConsoleKey.DownArrow:
                             case ConsoleKey.S:
-                                nextOrdinate++;
+                                if (!map.IsWall(player.NextDown))
+                                {
+                                    player.Down();
+                                }
                                 break;
                             default:
                                 break;
                         }
-                        if (!exit)
-                        {
-                            if (!walls.Contains(map.GetCharString(nextAbscissa, nextOrdinate)))
-                            {
-                                player.Abscissa = nextAbscissa;
-                                player.Ordinate = nextOrdinate;
-                            }
-                        }
                     }
+                }
+                if (true)
+                {
+
                 }
             }
             camera.Stop = true;

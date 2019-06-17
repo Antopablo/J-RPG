@@ -22,14 +22,19 @@ namespace J_RPG
         private StringBuilder _horizontalMargin;
         private StringBuilder _verticalMargin;
 
-        public Player player;
+        private Character _player;
 
+        public Character Player
+        {
+            get { return _player; }
+            set { _player = value; }
+        }
 
         private WorldMap _map;
         public WorldMap Map
         {
             get { return _map; }
-            set
+            private set
             {
                 _map = value;
                 _horizontalOffset = 0;
@@ -64,16 +69,29 @@ namespace J_RPG
         private int lensMapWidth;
         private int lensMapHeight;
 
-
         public Camera(int width, int height)
         {
             _width = width - 2;
             _height = height - 2;
             _lens = new List<StringBuilder>();
+            _map = new WorldMap();
             Stop = false;
         }
 
-        public void Render()
+        public void NonDeMethodePourSetLaMap(WorldMap map)
+        {
+            lock (_map)
+            {
+                Map = map;
+            }
+        }
+
+        // méthode d'assignations de la carte, du player, des quêtes, et autres (?) ...
+        // Methode de mise à jour de la carte en fonction des quêtes et éléments de quêtes
+        // liste dynamique de "Displayable" en fonction des Abscisses et Ordonnées de
+        //   la carte affichées par la camera
+
+        public void Run()
         {
             while (!Stop)
             {
@@ -89,75 +107,25 @@ namespace J_RPG
 
         private void GenerateLens()
         {
-            lock (player)
+            lock (_player)
             {
                 lensMapWidth = (_map.Width < _width) ? _map.Width : _width;
                 lensMapHeight = (_map.Height < _height) ? _map.Height : _height;
-                lensPlayerAbscissa = (_map.Width < _width) ? player.Abscissa : _width / 2;
-                lensPlayerOrdinate = (_map.Height < _height) ? player.Ordinate : _height / 2;
-                lensMapAbscissa = (_map.Width < _width) ? 0 : player.Abscissa - lensPlayerAbscissa;
-                lensMapOrdinate = (_map.Height < _height) ? 0 : player.Ordinate - lensPlayerOrdinate;
-                lensPlayerAbscissa = (_map.Width < _width) ? lensPlayerAbscissa : (player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? lensPlayerAbscissa + lensMapAbscissa : lensPlayerAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? lensPlayerAbscissa + (lensMapAbscissa - (_map.Width - _width)) : lensPlayerAbscissa);
-                lensPlayerOrdinate = (_map.Height < _height) ? lensPlayerOrdinate : (player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? lensPlayerOrdinate + lensMapOrdinate : lensPlayerOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? lensPlayerOrdinate + (lensMapOrdinate - (_map.Height - _height)) : lensPlayerOrdinate);
-                lensMapAbscissa = (_map.Width < _width) ? lensMapAbscissa : (player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? 0 : lensMapAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? _map.Width - _width : lensMapAbscissa);
-                lensMapOrdinate = (_map.Height < _height) ? lensMapOrdinate : (player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? 0 : lensMapOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? _map.Height - _height : lensMapOrdinate);
+                lensPlayerAbscissa = (_map.Width < _width) ? _player.Abscissa : _width / 2;
+                lensPlayerOrdinate = (_map.Height < _height) ? _player.Ordinate : _height / 2;
+                lensMapAbscissa = (_map.Width < _width) ? 0 : _player.Abscissa - lensPlayerAbscissa;
+                lensMapOrdinate = (_map.Height < _height) ? 0 : _player.Ordinate - lensPlayerOrdinate;
+                lensPlayerAbscissa = (_map.Width < _width) ? lensPlayerAbscissa : (_player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? lensPlayerAbscissa + lensMapAbscissa : lensPlayerAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? lensPlayerAbscissa + (lensMapAbscissa - (_map.Width - _width)) : lensPlayerAbscissa);
+                lensPlayerOrdinate = (_map.Height < _height) ? lensPlayerOrdinate : (_player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? lensPlayerOrdinate + lensMapOrdinate : lensPlayerOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? lensPlayerOrdinate + (lensMapOrdinate - (_map.Height - _height)) : lensPlayerOrdinate);
+                lensMapAbscissa = (_map.Width < _width) ? lensMapAbscissa : (_player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? 0 : lensMapAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? _map.Width - _width : lensMapAbscissa);
+                lensMapOrdinate = (_map.Height < _height) ? lensMapOrdinate : (_player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? 0 : lensMapOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? _map.Height - _height : lensMapOrdinate);
                 lock (_map)
                 {
                     _lens.Clear();
                     _lens = _map.GetSubPart(lensMapAbscissa, lensMapOrdinate, lensMapWidth, lensMapHeight);
-                    _lens[lensPlayerOrdinate][lensPlayerAbscissa] = player.Avatar;
+                    _lens[lensPlayerOrdinate][lensPlayerAbscissa] = _player.Avatar;
                 }
             }
-
-            //int lensPlayerAbscissa = _width / 2; //
-            //int lensPlayerOrdinate = _height / 2; //
-            //int lensMapAbscissa = 0; //
-            //int lensMapOrdinate = 0; //
-            //int lensMapWidth = _width; //
-            //int lensMapHeight = _height; //
-
-            //if (_map.Width < _width)
-            //{
-            //    lensMapWidth = _map.Width; //
-            //    lensPlayerAbscissa = player.Abscissa;
-            //}
-            //else
-            //{
-            //    lensMapAbscissa = player.Abscissa - lensPlayerAbscissa;
-            //    lensPlayerAbscissa = (player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? lensPlayerAbscissa + lensMapAbscissa : lensPlayerAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? lensPlayerAbscissa + (lensMapAbscissa - (_map.Width - _width)) : lensPlayerAbscissa);
-            //    lensMapAbscissa = (player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? 0 : lensMapAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? _map.Width - _width : lensMapAbscissa);
-            //}
-            //if (_map.Height < _height)
-            //{
-            //    lensMapHeight = _map.Height; //
-            //    lensPlayerOrdinate = player.Ordinate;
-            //}
-            //else
-            //{
-            //    lensMapOrdinate = player.Ordinate - lensPlayerOrdinate;
-            //    lensPlayerOrdinate = (player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? lensPlayerOrdinate + lensMapOrdinate : lensPlayerOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? lensPlayerOrdinate + (lensMapOrdinate - (_map.Height - _height)) : lensPlayerOrdinate);
-            //    lensMapOrdinate = (player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? 0 : lensMapOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? _map.Height - _height : lensMapOrdinate);
-            //}
-
-            //--------------- Contraction du code
-
-            //lensMapWidth = (_map.Width < _width) ? _map.Width : _width;
-            //lensPlayerAbscissa = (_map.Width < _width) ? player.Abscissa : _width / 2;
-            //lensMapAbscissa = (_map.Width < _width) ? 0 : player.Abscissa - lensPlayerAbscissa;
-            //lensPlayerAbscissa = (_map.Width < _width) ? lensPlayerAbscissa : (player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? lensPlayerAbscissa + lensMapAbscissa : lensPlayerAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? lensPlayerAbscissa + (lensMapAbscissa - (_map.Width - _width)) : lensPlayerAbscissa);
-            //lensMapAbscissa = (_map.Width < _width) ? lensMapAbscissa : (player.Abscissa < _map.Width / 2) ? ((lensMapAbscissa < 0) ? 0 : lensMapAbscissa) : ((lensMapAbscissa > _map.Width - _width) ? _map.Width - _width : lensMapAbscissa);
-
-            //lensMapHeight = (_map.Height < _height) ? _map.Height : _height;
-            //lensPlayerOrdinate = (_map.Height < _height) ? player.Ordinate : _height / 2;
-            //lensMapOrdinate = (_map.Height < _height) ? 0 : player.Ordinate - lensPlayerOrdinate;
-            //lensPlayerOrdinate = (_map.Height < _height) ? lensPlayerOrdinate : (player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? lensPlayerOrdinate + lensMapOrdinate : lensPlayerOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? lensPlayerOrdinate + (lensMapOrdinate - (_map.Height - _height)) : lensPlayerOrdinate);
-            //lensMapOrdinate = (_map.Height < _height) ? lensMapOrdinate : (player.Ordinate < _map.Height / 2) ? ((lensMapOrdinate < 0) ? 0 : lensMapOrdinate) : ((lensMapOrdinate > _map.Height - _height) ? _map.Height - _height : lensMapOrdinate);
-
-            //---------------
-
-            //_lens.Clear();
-            //_lens = _map.GetSubPart(lensMapAbscissa, lensMapOrdinate, lensMapWidth, lensMapHeight);
-            //_lens[lensPlayerOrdinate][lensPlayerAbscissa] = player.Avatar;
         }
 
         private void Display()
