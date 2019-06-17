@@ -29,37 +29,50 @@ namespace J_RPG
                 case "CHEVALIER":
                     perso = new Chevalier(nom, 250,107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("CHEVALIER");
+                    Console.WriteLine(perso);
                     break;
                 case "MAGE":
                     perso = new Mage(nom, 250, 107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("MAGE");
+
+                    Console.WriteLine(perso);
                     break;
                 case "ASSASSIN":
                     perso = new Assassin(nom, 250, 107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("ASSASSIN");
+
+                    Console.WriteLine(perso);
                     break;
                 case "ARCHER":
                     perso = new Archer(nom, 250, 107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("ARCHER");
+
+                    Console.WriteLine(perso);
                     break;
                 case "CHAMAN":
                     perso = new Chaman(nom, 250, 107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("CHAMAN");
+
+                    Console.WriteLine(perso);
                     break;
                 case "PRETRE":
                     perso = new Pretre(nom, 250, 107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("PRETRE");
+
+                    Console.WriteLine(perso);
                     break;
                 case "GUERRIER":
                     perso = new Guerrier(nom, 250, 107);
                     ListePersonnage.Add(perso);
-                    //Console.WriteLine(perso);
+                    perso.DessinerPersonnage("GUERRIER");
+
+                    Console.WriteLine(perso);
                     break;
                 default:
                     Console.WriteLine("Personnage inexistant");

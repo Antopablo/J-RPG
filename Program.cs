@@ -21,7 +21,28 @@ namespace J_RPG
 
 
             // Insertion des données dans la base
+            FabriquePersonnage Fabrique = new FabriquePersonnage();
+            string playername;
+            string ClasseChoice;
+            bool Continue = false;
 
+            Console.WriteLine("Bienvenue dans ce nouveau jeux épique");
+            Console.WriteLine("Voici votre personnage : @");
+            Console.WriteLine("Quel est son nom?");
+
+            playername = Console.ReadLine();
+            Console.WriteLine(playername + " ? C'est très moyen mais ça ira...");
+            while (!Continue)
+            {
+                Console.WriteLine("Dans ce jeu, vous avez le choix de votre voie. Quelle sera-t-elle ?");
+                Console.WriteLine("Archer / Assassin / Chaman / Chevalier / Guerrier / Mage");
+                ClasseChoice = Console.ReadLine().ToUpper();
+                Fabrique.CreerPerso(ClasseChoice, playername);
+                Continue = true;
+            }
+            Console.WriteLine("Pour commencer l'aventure dans le merveilleux monde de Ifantasia, appuyer sur entrée");
+            Console.ReadLine();
+            Console.Clear();
 
             char[] wallsChar = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬', '█' };
             string walls = new string(wallsChar);
@@ -59,7 +80,6 @@ namespace J_RPG
             while (!exit)
             {
                 if (Console.KeyAvailable)
-
                 {
                     lock (player)
                     {
@@ -103,7 +123,6 @@ namespace J_RPG
                         }
                     }
                 }
-                 
                     if (player.Position.Equals(quest.Position))
                     {
                         map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
