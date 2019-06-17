@@ -91,7 +91,6 @@
     <Compile Include="ConsoleWindowConfiguration.cs" />
     <Compile Include="WorldMap.cs" />
     <Compile Include="Interest.cs" />
-    <Compile Include="Character.cs" />
     <Compile Include="TextFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

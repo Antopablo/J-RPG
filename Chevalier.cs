@@ -8,7 +8,7 @@ namespace J_RPG
 {
     class Chevalier : Personnage
     {
-        public Chevalier(string nom) : base(nom)
+        public Chevalier(string nom, int abscissa, int ordinate) : base(nom, abscissa, ordinate)
         {
             base.Attaque += 0;
             base.Defense += 10;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    abstract class Displayable : Coordinates
+    class Displayable : Coordinates
     {
         /*#####################################################*/
         /*############                             ############*/

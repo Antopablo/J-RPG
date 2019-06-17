@@ -8,7 +8,7 @@ namespace J_RPG
 {
     class Assassin : Personnage
     {
-        public Assassin(string nom) : base(nom)
+        public Assassin(string nom, int abscissa, int ordinate) : base(nom, abscissa, ordinate)
         {
             base.Attaque += 10;
             base.Defense -= 5;

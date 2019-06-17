@@ -24,7 +24,7 @@ namespace J_RPG
         public int Ordinate { get { return _ordinate; } set { _ordinate = value; } }
 
         [NotMapped]
-        public Coordinates Position { get { return this; } }
+        public Coordinates Position { get { return new Coordinates(_abscissa, _ordinate); } }
 
         private int _interestId;
         public int InterestId { get { return _interestId; } set { _interestId = value; } }

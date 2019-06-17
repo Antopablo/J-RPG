@@ -8,7 +8,7 @@ namespace J_RPG
 {
     class Pretre : Personnage
     {
-        public Pretre(string nom) : base(nom)
+        public Pretre(string nom, int abscissa, int ordinate) : base(nom, abscissa, ordinate)
         {
             base.Attaque -= 5;
             base.Defense -= 5;

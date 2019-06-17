@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-     class Personnage
+     class Personnage : Displayable
     {
         static private List<Item> _InventaireCommun;
         public List<Item> InventaireCommun
@@ -118,6 +118,15 @@ namespace J_RPG
             set { _Pos_y_combat = value; }
         }
 
+        public void Left() { _abscissa--; }
+        public void Up() { _ordinate--; }
+        public void Right() { _abscissa++; }
+        public void Down() { _ordinate++; }
+
+        public Coordinates NextLeft { get { return new Coordinates(_abscissa - 1, _ordinate); } }
+        public Coordinates NextUp { get { return new Coordinates(_abscissa, _ordinate - 1); } }
+        public Coordinates NextRight { get { return new Coordinates(_abscissa + 1, _ordinate); } }
+        public Coordinates NextDown { get { return new Coordinates(_abscissa, _ordinate + 1); } }
 
 
 
@@ -125,7 +134,7 @@ namespace J_RPG
         {
             return "\nSes caracteristiques sont les suivantes : \nAttaque : " + Attaque + "\nDéfense : " + Defense + "\nPuissance magique : " + Magie + "\nRésistance magique : " + Resistance + "\nVitesse d'attaque : " + Vitesse + "\nPoint de vie maximum : " + PvMax + "\r\n";        }
 
-        public Personnage(string nom)
+        public Personnage(string nom, int abscissa, int ordinate) : base ('@', abscissa, ordinate)
         {
             _nom = nom;
             _pvMax = 50;
@@ -140,8 +149,6 @@ namespace J_RPG
             _Level = 1;
             XP = 0;
         }
-
-
 
         public void DessinerPersonnage(string s)
         {

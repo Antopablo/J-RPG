@@ -22,9 +22,9 @@ namespace J_RPG
         private StringBuilder _horizontalMargin;
         private StringBuilder _verticalMargin;
 
-        private Character _player;
+        private Personnage _player;
 
-        public Character Player
+        public Personnage Player
         {
             get { return _player; }
             set { _player = value; }

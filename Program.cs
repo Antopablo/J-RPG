@@ -27,12 +27,13 @@ namespace J_RPG
             string walls = new string(wallsChar);
 
             WorldMap map;
-            Character player;
+            Personnage player;
+            Quete quest;
 
             // WorldMap.txt
             map = new WorldMap("", @"..\..\Maps", "WorldMap.txt", walls, null);
-            player = new Character(250, 107);
-
+            player = new Personnage("Frank", 250, 107);
+            
             // WorldMap.txt
             //map = new WorldMap("", @"..\..\Maps", "WorldMap2.txt", walls, null);
             //player = new Character(238, 22);
@@ -41,14 +42,16 @@ namespace J_RPG
             //map = new WorldMap("", @"..\..\Maps", "WorldMap3.txt", walls, null);
             //player = new Character(49, 92);
 
-            // WorldMap.txt
+            // WorldMap.txt // carte Donjon
             //map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
             //player = new Character(22, 22);
+
 
             Camera camera = new Camera(ConsoleConfiguration.AvailableConsoleWidth, ConsoleConfiguration.AvailableConsoleHeight);
             camera.NonDeMethodePourSetLaMap(map);
             camera.Player = player;
 
+            quest = new Quete(01, new Item("Sword", Stats.attaque, 10), new string[] { "test1", "test2", "test3" }, player, ETAT_QUEST.NON_COMMENCE, 252, 107);
             Thread display = new Thread(camera.Run);
             display.Start();
 
@@ -85,6 +88,7 @@ namespace J_RPG
                                 if (!map.IsWall(player.NextRight))
                                 {
                                     player.Right();
+                                    
                                 }
                                 break;
                             case ConsoleKey.DownArrow:
@@ -99,11 +103,16 @@ namespace J_RPG
                         }
                     }
                 }
-
-                if (true)
-                {
-
-                }
+                 
+                    if (player.Position.Equals(quest.Position))
+                    {
+                        map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
+                        camera.NonDeMethodePourSetLaMap(map);
+                        player.Abscissa = 22;
+                        player.Ordinate = 22;
+                        camera.Player = player;
+                    }
+                
             }
             camera.Stop = true;
             display.Join();

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    class Mob : Personnage
+    class Mob 
     {
-        public Mob(string nom) : base(nom)
-        {
-        }
+
     }
 }

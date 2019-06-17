@@ -12,9 +12,9 @@ namespace J_RPG
         COMMENCE,
         TERMINEE
     }
-    class Quete
+    class Quete : Displayable
     {
-        public Quete(int iD, Item recompense, string[] texte_Quete, Personnage inventaire_Personnage, ETAT_QUEST etat_Quete)
+        public Quete(int iD, Item recompense, string[] texte_Quete, Personnage inventaire_Personnage, ETAT_QUEST etat_Quete, int x, int y) : base ('!', x, y)
         {
             ID = iD;
             CompteurQuest = 0;
@@ -22,9 +22,12 @@ namespace J_RPG
             Texte_Quete = texte_Quete;
             Inventaire_Personnage = inventaire_Personnage.InventaireCommun;
             Etat_Quete = etat_Quete;
+            x = 252;
+            y = 107;
         }
 
         public int ID { get; set; }
+
         public int CompteurQuest { get; set; }
 
         public Item Recompense { get; set; }

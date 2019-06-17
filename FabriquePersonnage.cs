@@ -27,37 +27,37 @@ namespace J_RPG
             switch (quelperso)
             {
                 case "CHEVALIER":
-                    perso = new Chevalier(nom);
+                    perso = new Chevalier(nom, 250,107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
                 case "MAGE":
-                    perso = new Mage(nom);
+                    perso = new Mage(nom, 250, 107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
                 case "ASSASSIN":
-                    perso = new Assassin(nom);
+                    perso = new Assassin(nom, 250, 107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
                 case "ARCHER":
-                    perso = new Archer(nom);
+                    perso = new Archer(nom, 250, 107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
                 case "CHAMAN":
-                    perso = new Chaman(nom);
+                    perso = new Chaman(nom, 250, 107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
                 case "PRETRE":
-                    perso = new Pretre(nom);
+                    perso = new Pretre(nom, 250, 107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
                 case "GUERRIER":
-                    perso = new Guerrier(nom);
+                    perso = new Guerrier(nom, 250, 107);
                     ListePersonnage.Add(perso);
                     //Console.WriteLine(perso);
                     break;
