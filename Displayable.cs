@@ -6,15 +6,22 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    abstract class Displayable : Coordinate
+    abstract class Displayable : Coordinates
     {
-        protected char _avatar;
+        /*#####################################################*/
+        /*############                             ############*/
+        /*############   Attributs et propriétés   ############*/
+        /*############                             ############*/
+        /*#####################################################*/
 
-        public char Avatar
-        {
-            get { return _avatar; }
-            set { _avatar = value; }
-        }
+        protected char _avatar;
+        public char Avatar { get { return _avatar; } set { _avatar = value; } }
+
+        /*#####################################################*/
+        /*############                             ############*/
+        /*############  Constructeurs et méthodes  ############*/
+        /*############                             ############*/
+        /*#####################################################*/
 
         public Displayable() { }
 
