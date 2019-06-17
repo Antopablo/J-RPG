@@ -1,0 +1,7 @@
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\bin\Debug\J-RPG.exe.config
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\bin\Debug\J-RPG.exe
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\bin\Debug\J-RPG.pdb
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.csproj.CoreCompileInputs.cache
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.exe
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.pdb
+C:\Users\stagiaire\Desktop\Dossier_JRPG\J-RPG\obj\Debug\J-RPG.csprojAssemblyReference.cache

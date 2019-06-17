@@ -22,8 +22,6 @@ namespace J_RPG
             }
         }
 
-        private SingletonRandom() : base()
-        {
-        }
+        private SingletonRandom() : base() { }
     }
 }
