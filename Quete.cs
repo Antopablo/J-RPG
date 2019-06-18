@@ -14,7 +14,7 @@ namespace J_RPG
     }
     class Quete : Displayable
     {
-        public Quete(int iD, Item recompense, string[] texte_Quete, Personnage inventaire_Personnage, ETAT_QUEST etat_Quete, int x, int y) : base ('!', x, y)
+        public Quete(int iD, Item recompense, string texte_Quete, Personnage inventaire_Personnage, ETAT_QUEST etat_Quete, int x, int y) : base ('!', x, y)
         {
             ID = iD;
             CompteurQuest = 0;
@@ -32,7 +32,7 @@ namespace J_RPG
 
         public Item Recompense { get; set; }
 
-        public string[] Texte_Quete { get; set; }
+        public string Texte_Quete { get; set; }
 
         public List<Item> Inventaire_Personnage { get; set; }
 

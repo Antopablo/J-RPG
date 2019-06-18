@@ -72,9 +72,12 @@ namespace J_RPG
             camera.NonDeMethodePourSetLaMap(map);
             camera.Player = player;
 
-            quest = new Quete(01, new Item("Sword", Stats.attaque, 10), new string[] { "test1", "test2", "test3" }, player, ETAT_QUEST.NON_COMMENCE, 252, 107);
+            quest = new Quete(01, new Item("Sword", Stats.attaque, 10), "test1", player, ETAT_QUEST.NON_COMMENCE, 252, 107);
             Thread display = new Thread(camera.Run);
             display.Start();
+
+            PopUp Popup = new PopUp();
+            camera._Pop = Popup;
 
             bool exit = false;
             while (!exit)
@@ -85,7 +88,6 @@ namespace J_RPG
                     {
                         switch (Console.ReadKey(true).Key)
                         {
-
                             case ConsoleKey.Escape:
                                 exit = true;
                                 break;
@@ -123,14 +125,10 @@ namespace J_RPG
                         }
                     }
                 }
-                    if (player.Position.Equals(quest.Position))
-                    {
-                        map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
-                        camera.NonDeMethodePourSetLaMap(map);
-                        player.Abscissa = 22;
-                        player.Ordinate = 22;
-                        camera.Player = player;
-                    }
+                if (player.Position.Equals(quest.Position))
+                {
+                    
+                }
                 
             }
             camera.Stop = true;
@@ -138,4 +136,3 @@ namespace J_RPG
         }
     }
 }
-
