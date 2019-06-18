@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
+
     class Displayable : Coordinates
     {
         /*#####################################################*/
@@ -23,7 +24,7 @@ namespace J_RPG
         /*############                             ############*/
         /*#####################################################*/
 
-        public Displayable() { }
+        //public Displayable() { }
 
         public Displayable(char avatar, int abscissa, int ordinate) : base(abscissa, ordinate)
         {

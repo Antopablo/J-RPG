@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
-//86
+
 namespace J_RPG
 {
     class Camera
@@ -13,25 +13,21 @@ namespace J_RPG
 
         private List<StringBuilder> _lens;
 
-        public int _width;
-        public int _height;
+        private int lensPlayerAbscissa;
+        private int lensPlayerOrdinate;
+        private int lensMapAbscissa;
+        private int lensMapOrdinate;
+        private int lensMapWidth;
+        private int lensMapHeight;
+
+        private int _width;
+        private int _height;
 
         private int _horizontalOffset;
         private int _verticalOffset;
 
         private StringBuilder _horizontalMargin;
         private StringBuilder _verticalMargin;
-
-        private Personnage _player;
-
-        public PopUp _Pop;
-        private bool AffichePopUp;
-
-        public Personnage Player
-        {
-            get { return _player; }
-            set { _player = value; }
-        }
 
         private WorldMap _map;
         public WorldMap Map
@@ -65,12 +61,8 @@ namespace J_RPG
             }
         }
 
-        private int lensPlayerAbscissa;
-        private int lensPlayerOrdinate;
-        private int lensMapAbscissa;
-        private int lensMapOrdinate;
-        private int lensMapWidth;
-        private int lensMapHeight;
+        private Character _player;
+        public Character Player { get { return _player; } set { _player = value; } }
 
         public Camera(int width, int height)
         {
@@ -79,8 +71,6 @@ namespace J_RPG
             _lens = new List<StringBuilder>();
             _map = new WorldMap();
             Stop = false;
-            AffichePopUp = false;
-           // _Pop = new PopUp();
         }
 
         public void NonDeMethodePourSetLaMap(WorldMap map)

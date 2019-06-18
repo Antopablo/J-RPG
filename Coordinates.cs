@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace J_RPG
 {
-    public class Coordinates
+    [DataContract]
+    class Coordinates
     {
         /*#####################################################*/
         /*############                             ############*/
@@ -15,22 +16,16 @@ namespace J_RPG
         /*############                             ############*/
         /*#####################################################*/
 
-        public int Id { get; set; }
 
         protected int _abscissa;
+        [DataMember]
         public int Abscissa { get { return _abscissa; } set { _abscissa = value; } }
 
         protected int _ordinate;
+        [DataMember]
         public int Ordinate { get { return _ordinate; } set { _ordinate = value; } }
 
-        [NotMapped]
-        public Coordinates Position { get { return new Coordinates(_abscissa, _ordinate); } }
-
-        private int _interestId;
-        public int InterestId { get { return _interestId; } set { _interestId = value; } }
-        [Index]
-        [ForeignKey("InterestId")]
-        virtual public Interest Spark { get; set; }
+        public Coordinates Position { get { return new Coordinates(this); } }
 
         /*#####################################################*/
         /*############                             ############*/
@@ -38,12 +33,13 @@ namespace J_RPG
         /*############                             ############*/
         /*#####################################################*/
 
-        public Coordinates() { }
+
+        //public Coordinates() { }
 
         public Coordinates(int abscissa, int ordinate)
         {
-            _abscissa = abscissa;
-            _ordinate = ordinate;
+            Abscissa = abscissa;
+            Ordinate = ordinate;
         }
 
         public Coordinates(Coordinates coordinate)

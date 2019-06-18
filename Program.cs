@@ -19,6 +19,8 @@ namespace J_RPG
             ConsoleWindowConfiguration.Setup();
             ConsoleConfiguration.Setup();
 
+            MapsDatas.Initialize();
+            MapsDatas.CreateJsonMetadatas();
 
             // Insertion des données dans la base
             FabriquePersonnage Fabrique = new FabriquePersonnage();
@@ -51,26 +53,17 @@ namespace J_RPG
             Personnage player;
             Quete quest;
 
-            // WorldMap.txt
-            map = new WorldMap("", @"..\..\Maps", "WorldMap.txt", walls, null);
-            player = new Personnage("Frank", 250, 107);
             
-            // WorldMap.txt
-            //map = new WorldMap("", @"..\..\Maps", "WorldMap2.txt", walls, null);
-            //player = new Character(238, 22);
 
-            // WorldMap.txt
-            //map = new WorldMap("", @"..\..\Maps", "WorldMap3.txt", walls, null);
-            //player = new Character(49, 92);
-
-            // WorldMap.txt // carte Donjon
-            //map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
-            //player = new Character(22, 22);
+            map = MapsDatas.GetWorldMap("Ifantasia");
+            map.Load();
+            player = new Personnage("Frank", 250, 107);
 
 
             Camera camera = new Camera(ConsoleConfiguration.AvailableConsoleWidth, ConsoleConfiguration.AvailableConsoleHeight);
             camera.NonDeMethodePourSetLaMap(map);
             camera.Player = player;
+
 
             quest = new Quete(01, new Item("Sword", Stats.attaque, 10), "test1", player, ETAT_QUEST.NON_COMMENCE, 252, 107);
             Thread display = new Thread(camera.Run);
@@ -110,7 +103,6 @@ namespace J_RPG
                                 if (!map.IsWall(player.NextRight))
                                 {
                                     player.Right();
-                                    
                                 }
                                 break;
                             case ConsoleKey.DownArrow:
@@ -124,12 +116,17 @@ namespace J_RPG
                                 break;
                         }
                     }
+                    if (map.IsDoorway(player.Position))
+                    {
+                        lock (player)
+                        {
+                            string originMapName = map.Name;
+                            map = MapsDatas.GetWorldMap(map.DoorwayTarget(player.Position));
+                            camera.NonDeMethodePourSetLaMap(map);
+                            player.SetPosition(MapsDatas.GetHall(originMapName, map));
+                        }
+                    }
                 }
-                if (player.Position.Equals(quest.Position))
-                {
-                    
-                }
-                
             }
             camera.Stop = true;
             display.Join();
