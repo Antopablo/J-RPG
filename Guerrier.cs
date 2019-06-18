@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    class Guerrier : Personnage
+    class Guerrier : Character
     {
         public Guerrier(string nom, int abscissa, int ordinate) : base(nom, abscissa, ordinate)
         {

@@ -80,7 +80,7 @@
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
-    <Compile Include="Personnage.cs" />
+    <Compile Include="Character.cs" />
     <Compile Include="PopUp.cs" />
     <Compile Include="Pretre.cs" />
     <Compile Include="ApplicationDatabase.cs" />
@@ -93,7 +93,6 @@
     <Compile Include="ConsoleWindowConfiguration.cs" />
     <Compile Include="WorldMap.cs" />
     <Compile Include="Interest.cs" />
-    <Compile Include="Character.cs" />
     <Compile Include="TextFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,6 +136,8 @@
     <Content Include="bin\Debug\J-RPG.exe" />
     <Content Include="bin\Debug\J-RPG.pdb" />
     <Content Include="bin\Debug\UTF8Encoding.txt" />
+    <Content Include="Maps\GoblinDen-Map.txt" />
+    <Content Include="Maps\World-Map.txt" />
     <Content Include="Maps\WorldMap.txt" />
     <Content Include="Maps\WorldMap2.txt" />
     <Content Include="Maps\WorldMap3.txt" />

@@ -47,22 +47,29 @@ namespace J_RPG
             Console.Clear();
 
             WorldMap map;
-            Personnage player;
+            Character player;
             Quete quest;
 
             
 
             map = MapsDatas.GetWorldMap("Ifantasia");
             map.Load();
-            player = new Personnage("Frank", 250, 107);
+            player = new Character("Frank", 250, 107);
 
 
             Camera camera = new Camera(ConsoleConfiguration.AvailableConsoleWidth, ConsoleConfiguration.AvailableConsoleHeight);
             camera.NonDeMethodePourSetLaMap(map);
             camera.Player = player;
 
-
-            quest = new Quete(01, new Item("Sword", Stats.attaque, 10), "test1", player, ETAT_QUEST.NON_COMMENCE, 252, 107);
+            List<string> questText = new List<string>();
+            questText.Add("QUETE :");
+            questText.Add("Videz le donjon,");
+            questText.Add("récupérez le Rubis");
+            questText.Add("et revenez me voir");
+            questText.Add(" ");
+            questText.Add("Accepter (entrée)");
+            questText.Add("Plus tard (Echap)");
+            quest = new Quete(01, new Item("Sword", Stats.attaque, 10), questText, ETAT_QUEST.ENABLE, new Coordinates(252, 107));
             Thread display = new Thread(camera.Run);
             display.Start();
 
@@ -120,6 +127,14 @@ namespace J_RPG
                             map = MapsDatas.GetWorldMap(map.DoorwayTarget(player.Position));
                             camera.NonDeMethodePourSetLaMap(map);
                             player.SetPosition(MapsDatas.GetHall(originMapName, map));
+                        }
+                    }
+                    if (quest.Position.Equals(player.Position))
+                    {
+                        lock (Popup)
+                        {
+                            Popup.Text = quest.TextQuest;
+                            Popup.Displayed = true;
                         }
                     }
                 }

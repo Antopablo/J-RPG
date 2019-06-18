@@ -61,8 +61,20 @@ namespace J_RPG
             }
         }
 
-        private Personnage _player;
-        public Personnage Player { get { return _player; } set { _player = value; } }
+        private Character _player;
+        public Character Player { get { return _player; } set { _player = value; } }
+
+        private Quete _quest;
+        public Quete Quest { get { return _quest; } set { _quest = value; } }
+
+        private PopUp _pop;
+
+        public PopUp Pop
+        {
+            get { return _pop; }
+            set { _pop = value; }
+        }
+
 
         public Camera(int width, int height)
         {
@@ -118,6 +130,13 @@ namespace J_RPG
                 {
                     _lens.Clear();
                     _lens = _map.GetSubPart(lensMapAbscissa, lensMapOrdinate, lensMapWidth, lensMapHeight);
+                    lock (_pop)
+                    {
+                        if (_pop.Displayed)
+                        {
+                            // Ajouter surcouche
+                        }
+                    }
                     _lens[lensPlayerOrdinate][lensPlayerAbscissa] = _player.Avatar;
                 }
             }

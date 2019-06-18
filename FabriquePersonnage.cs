@@ -10,20 +10,20 @@ namespace J_RPG
     {
         public FabriquePersonnage()
         {
-            ListePersonnage = new List<Personnage>();
+            ListePersonnage = new List<Character>();
         }
 
-        private List<Personnage> _ListePersonnage;
-        public List<Personnage> ListePersonnage 
+        private List<Character> _ListePersonnage;
+        public List<Character> ListePersonnage 
         {
             get { return _ListePersonnage; }
             set { _ListePersonnage = value; }
         }
 
 
-        public Personnage CreerPerso (string quelperso, string nom)
+        public Character CreerPerso (string quelperso, string nom)
         {
-            Personnage perso = null;
+            Character perso = null;
             switch (quelperso)
             {
                 case "CHEVALIER":

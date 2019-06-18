@@ -8,22 +8,20 @@ namespace J_RPG
 {
     enum ETAT_QUEST
     {
-        NON_COMMENCE,
-        COMMENCE,
-        TERMINEE
+       DISABLE,
+       ENABLE,
+       RUNNING,
+       FINISH
     }
     class Quete : Displayable
     {
-        public Quete(int iD, Item recompense, string texte_Quete, Personnage inventaire_Personnage, ETAT_QUEST etat_Quete, int x, int y) : base ('!', x, y)
+        public Quete(int iD, Item recompense,List<string> textQuest, ETAT_QUEST etat_Quete, Coordinates coord) : base ('!', coord.Abscissa, coord.Ordinate)
         {
             ID = iD;
             CompteurQuest = 0;
             Recompense = recompense;
-            Texte_Quete = texte_Quete;
-            Inventaire_Personnage = inventaire_Personnage.InventaireCommun;
+            TextQuest = new List<string>();
             Etat_Quete = etat_Quete;
-            x = 252;
-            y = 107;
         }
 
         public int ID { get; set; }
@@ -32,13 +30,8 @@ namespace J_RPG
 
         public Item Recompense { get; set; }
 
-        public string Texte_Quete { get; set; }
-
-        public List<Item> Inventaire_Personnage { get; set; }
+        public List<string> TextQuest { get; set; }
 
         public ETAT_QUEST Etat_Quete { get; set; }
-
-
-
     }
 }
