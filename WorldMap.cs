@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace J_RPG
 {
-    public class WorldMap
+    [DataContract]
+    class WorldMap
     {
         /*#####################################################*/
         /*############                             ############*/
@@ -15,50 +16,33 @@ namespace J_RPG
         /*############                             ############*/
         /*#####################################################*/
 
-        public int Id { get; set; }
-
         private string _name;
+        [DataMember]
         public string Name { get { return _name; } set { _name = value; } }
 
         private string _path;
+        [DataMember]
         public string Path { get { return _path; } set { _path = @"" + value; } }
 
         private string _file;
+        [DataMember]
         public string File { get { return _file; } set { _file = value; } }
 
         private string _walls;
+        [DataMember]
         public string Walls { get { return _walls; } set { _walls = value; } }
+
+        private List<Interest> _doorways;
+        [DataMember]
+        public List<Interest> Doorways { get { return _doorways; } set { _doorways = value; } }
 
         private List<StringBuilder> _map;
 
-        [NotMapped]
         public int Width { get { return _map[0].Length; } }
-        [NotMapped]
         public int Height { get { return _map.Count; } }
 
-        [NotMapped]
         public int MaxAbscissa { get { return _map[0].Length - 1; } }
-        [NotMapped]
         public int MaxOrdinate { get { return _map.Count - 1; } }
-
-        private List<Interest> _doorways;
-        [InverseProperty("Map")]
-        virtual public List<Interest> Doorways // database InverseProperty
-        {
-            get { return _doorways; }
-            set { _doorways = value; }
-        }
-
-        // Possible de globaliser ainsi de façon qu'un Id de WorldMap ou un Id de Quest
-        // ou un Id d'autre chose puisse référencer la valeur de la clé étrangère ?
-
-        //private List<Interest> _doorways;
-        //[InverseProperty("Target")]
-        //virtual public List<Interest> Doorways // database InverseProperty
-        //{
-        //    get { return _doorways; }
-        //    set { _doorways = value; }
-        //}
 
         /*#####################################################*/
         /*############                             ############*/
@@ -75,13 +59,13 @@ namespace J_RPG
             File = file;
             Walls = walls;
             Doorways = doorways;
-            _map = new List<StringBuilder>();
             Load();
         }
 
-        private void Load()
+        public void Load()
         {
-            TextFile mapFile = new TextFile(_path, _file);
+            _map = new List<StringBuilder>();
+            TextFile mapFile = new TextFile(@"" + _path, _file);
             foreach (string line in mapFile)
             {
                 _map.Add(new StringBuilder(line));
@@ -98,21 +82,6 @@ namespace J_RPG
             return subPart;
         }
 
-        //public void SetContentAt(int abscissa, int ordinate, char avatar)
-        //{
-        //    _map[ordinate][abscissa] = avatar;
-        //}
-
-        //public void SetContentAt(Displayable displayable)
-        //{
-        //    _map[displayable.Ordinate][displayable.Abscissa] = displayable.Avatar;
-        //}
-
-        //public char GetContentAt(int abscissa, int ordinate)
-        //{
-        //    return _map[ordinate][abscissa];
-        //}
-
         public char GetContentAt(Coordinates coordinates)
         {
             return _map[coordinates.Ordinate][coordinates.Abscissa];
@@ -123,25 +92,15 @@ namespace J_RPG
             return _walls.Contains(GetContentAt(coordinates));
         }
 
-        // isDoorway
-        public int HasTriggerOn(Coordinates coordinates)
+        public bool IsDoorway(Coordinates coordinates)
         {
-            // A retravailler
-            bool isDoorway = false;
-            int index = -1;
-            for (int i = 0; i < _doorways.Count && !isDoorway; i++)
-            {
-                isDoorway = _doorways[i].IsTriggered(coordinates);
-                index = isDoorway ? i : -1;
-            }
-            return index;
+            return _doorways.Exists(doorway => doorway.IsTriggered(coordinates));
         }
 
         // getDoorwayTarget
-        public string GetTriggerTarget(Coordinates coordinates)
+        public string DoorwayTarget(Coordinates coordinates)
         {
-            int index = HasTriggerOn(coordinates);
-            return (index < 0) ? null : _doorways[index].Name;
+            return _doorways.First(doorway => doorway.IsTriggered(coordinates)).Name;
         }
 
     }
