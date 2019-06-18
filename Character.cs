@@ -12,6 +12,12 @@ namespace J_RPG
 
         public Character(Coordinates coordinates) : base('@', coordinates.Abscissa, coordinates.Ordinate) { }
 
+        public void SetPosition(Coordinates coordinates)
+        {
+            _abscissa = coordinates.Abscissa;
+            _ordinate = coordinates.Ordinate;
+        }
+
         public void Left() { _abscissa--; }
         public void Up() { _ordinate--; }
         public void Right() { _abscissa++; }

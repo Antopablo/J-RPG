@@ -21,7 +21,7 @@ namespace J_RPG
         public TextFile(string path, string file, bool empty)
         {
             _path = @"" + path;
-            _file = file;
+            _file = file + "-Map.txt";
             _count = -1;
             if (empty)
             {

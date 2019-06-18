@@ -17,19 +17,18 @@ namespace J_RPG
             ConsoleWindowConfiguration.Setup();
             ConsoleConfiguration.Setup();
 
+            MapsDatas.Initialize();
+            MapsDatas.CreateJsonMetadatas();
 
-            // Insertion des données dans la base
-
-
-            char[] wallsChar = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬', '█' };
-            string walls = new string(wallsChar);
+            //char[] wallsChar = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬', '█' };
+            //string walls = new string(wallsChar);
 
             WorldMap map;
             Character player;
 
             // WorldMap.txt
-            map = new WorldMap("", @"..\..\Maps", "WorldMap.txt", walls, null);
-            player = new Character(250, 107);
+            //map = new WorldMap("", @"..\..\Maps", "World", walls, null);
+            //player = new Character(250, 107);
 
             // WorldMap.txt
             //map = new WorldMap("", @"..\..\Maps", "WorldMap2.txt", walls, null);
@@ -42,6 +41,10 @@ namespace J_RPG
             // WorldMap.txt
             //map = new WorldMap("", @"..\..\Maps", "WorldMap4.txt", walls, null);
             //player = new Character(22, 22);
+
+            map = MapsDatas.GetWorldMap("Ifantasia");
+            map.Load();
+            player = new Character(250, 107);
 
             Camera camera = new Camera(ConsoleConfiguration.AvailableConsoleWidth, ConsoleConfiguration.AvailableConsoleHeight);
             camera.NonDeMethodePourSetLaMap(map);
@@ -94,10 +97,16 @@ namespace J_RPG
                                 break;
                         }
                     }
-                }
-                if (true)
-                {
-
+                    if (map.IsDoorway(player.Position))
+                    {
+                        lock (player)
+                        {
+                            string originMapName = map.Name;
+                            map = MapsDatas.GetWorldMap(map.DoorwayTarget(player.Position));
+                            camera.NonDeMethodePourSetLaMap(map);
+                            player.SetPosition(MapsDatas.GetHall(originMapName, map));
+                        }
+                    }
                 }
             }
             camera.Stop = true;

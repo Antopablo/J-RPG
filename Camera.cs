@@ -13,6 +13,13 @@ namespace J_RPG
 
         private List<StringBuilder> _lens;
 
+        private int lensPlayerAbscissa;
+        private int lensPlayerOrdinate;
+        private int lensMapAbscissa;
+        private int lensMapOrdinate;
+        private int lensMapWidth;
+        private int lensMapHeight;
+
         private int _width;
         private int _height;
 
@@ -21,14 +28,6 @@ namespace J_RPG
 
         private StringBuilder _horizontalMargin;
         private StringBuilder _verticalMargin;
-
-        private Character _player;
-
-        public Character Player
-        {
-            get { return _player; }
-            set { _player = value; }
-        }
 
         private WorldMap _map;
         public WorldMap Map
@@ -62,12 +61,8 @@ namespace J_RPG
             }
         }
 
-        private int lensPlayerAbscissa;
-        private int lensPlayerOrdinate;
-        private int lensMapAbscissa;
-        private int lensMapOrdinate;
-        private int lensMapWidth;
-        private int lensMapHeight;
+        private Character _player;
+        public Character Player { get { return _player; } set { _player = value; } }
 
         public Camera(int width, int height)
         {
