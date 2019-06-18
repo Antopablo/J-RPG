@@ -46,9 +46,6 @@ namespace J_RPG
             Console.ReadLine();
             Console.Clear();
 
-            char[] wallsChar = new char[] { '☼', '╣', '║', '╗', '╝', '╚', '╔', '╩', '╦', '╠', '═', '╬', '█' };
-            string walls = new string(wallsChar);
-
             WorldMap map;
             Personnage player;
             Quete quest;
@@ -70,7 +67,6 @@ namespace J_RPG
             display.Start();
 
             PopUp Popup = new PopUp();
-            camera._Pop = Popup;
 
             bool exit = false;
             while (!exit)

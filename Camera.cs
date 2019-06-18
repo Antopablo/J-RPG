@@ -61,8 +61,8 @@ namespace J_RPG
             }
         }
 
-        private Character _player;
-        public Character Player { get { return _player; } set { _player = value; } }
+        private Personnage _player;
+        public Personnage Player { get { return _player; } set { _player = value; } }
 
         public Camera(int width, int height)
         {

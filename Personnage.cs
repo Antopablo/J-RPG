@@ -128,7 +128,11 @@ namespace J_RPG
         public Coordinates NextRight { get { return new Coordinates(_abscissa + 1, _ordinate); } }
         public Coordinates NextDown { get { return new Coordinates(_abscissa, _ordinate + 1); } }
 
-
+        public void SetPosition(Coordinates coordinates)
+        {
+            _abscissa = coordinates.Abscissa;
+            _ordinate = coordinates.Ordinate;
+        }
 
         public override string ToString()
         {
