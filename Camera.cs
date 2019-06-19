@@ -130,13 +130,7 @@ namespace J_RPG
                 {
                     _lens.Clear();
                     _lens = _map.GetSubPart(lensMapAbscissa, lensMapOrdinate, lensMapWidth, lensMapHeight);
-                    lock (_pop)
-                    {
-                        if (_pop.Displayed)
-                        {
-                            // Ajouter surcouche
-                        }
-                    }
+                   
                     _lens[lensPlayerOrdinate][lensPlayerAbscissa] = _player.Avatar;
                 }
             }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    class ItemEquipement : Item
+    public class ItemEquipement : Item
     {
         public ItemEquipement(string nom, Stats nomStat, int bonus) : base(nom, nomStat, bonus)
         {

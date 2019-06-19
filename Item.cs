@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace J_RPG
 {
-    enum Stats
+    public enum Stats
     {
         attaque,
         defense,
@@ -16,8 +19,11 @@ namespace J_RPG
         pv
     }
 
-    class Item
+    [Table("Item")]
+    public class Item
     {
+        public int ID { get; set; }
+
         private string _nom;
         public string Nom
         {
@@ -44,6 +50,11 @@ namespace J_RPG
             Nom = nom;
             NomStat = nomStat;
             Bonus = bonus;
+        }
+
+        public Item()
+        {
+            
         }
     }
 }

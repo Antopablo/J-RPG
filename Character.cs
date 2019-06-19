@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace J_RPG
 {
-     class Character : Displayable
+    [Table("Character")]
+     public class Character : Displayable
     {
         static private List<Item> _InventaireCommun;
         public List<Item> InventaireCommun
@@ -22,9 +26,11 @@ namespace J_RPG
             set { _Equipement = value; }
         }
 
-
+        
+        public int ID { get; set; }
 
         private string _nom;
+        
         public string Nom
         {
             get { return _nom; }
@@ -32,6 +38,7 @@ namespace J_RPG
         }
 
         private int _pvMax;
+        
         public int PvMax
         {
             get { return _pvMax + GetBonus(Stats.pv); }
@@ -86,37 +93,10 @@ namespace J_RPG
             get { return _Level; }
             private set { _Level = value; }
         }
-
         public int XP { get; set; }
 
-
-        private int _Pos_x_map;
-        public int Pos_x
-        {
-            get { return _Pos_x_map; }
-            set { _Pos_x_map = value; }
-        }
-
-        private int _Pos_y_map;
-        public int Pos_y
-        {
-            get { return _Pos_y_map; }
-            set { _Pos_y_map = value; }
-        }
-
-        private int _Pos_x_combat;
-        public int Pos_x_combat
-        {
-            get { return _Pos_x_combat; }
-            set { _Pos_x_combat = value; }
-        }
-
-        private int _Pos_y_combat;
-        public int Pos_y_combat
-        {
-            get { return _Pos_y_combat; }
-            set { _Pos_y_combat = value; }
-        }
+        [NotMapped]
+        public Coordinates Coordinate_Combat { get; set; }
 
         public void Left() { _abscissa--; }
         public void Up() { _ordinate--; }
@@ -153,6 +133,8 @@ namespace J_RPG
             _Level = 1;
             XP = 0;
         }
+
+        public Character() : base() { }
 
         public void DessinerPersonnage(string s)
         {
@@ -564,6 +546,8 @@ s:````o..o```````::     yddddddd:   -:`````/.   odddddddo     -:.``````o---+```.
 
             return bonus;
         }
+
+
 
     }
 }

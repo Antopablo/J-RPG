@@ -114,6 +114,7 @@
     <None Include="packages\EntityFramework.6.2.0\tools\init.ps1" />
     <None Include="packages\EntityFramework.6.2.0\tools\install.ps1" />
     <None Include="packages.config" />
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -157,6 +158,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

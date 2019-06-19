@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace J_RPG
 {
-
-    class Displayable : Coordinates
+    
+    public abstract class Displayable : Coordinates
     {
         /*#####################################################*/
         /*############                             ############*/
@@ -24,11 +25,12 @@ namespace J_RPG
         /*############                             ############*/
         /*#####################################################*/
 
-        //public Displayable() { }
+        public Displayable() { }
 
         public Displayable(char avatar, int abscissa, int ordinate) : base(abscissa, ordinate)
         {
             _avatar = avatar;
         }
+
     }
 }

@@ -9,8 +9,11 @@ namespace J_RPG
 {
     class ApplicationDatabase : DbContext
     {
-        public DbSet<WorldMap> WorldMaps { get; set; }
-        public DbSet<Interest> Interests { get; set; }
+        //public DbSet<WorldMap> WorldMaps { get; set; }
+        //public DbSet<Interest> Interests { get; set; }
+
         public DbSet<Coordinates> Coordinates { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Character> Characters { get; set; }
     }
 }

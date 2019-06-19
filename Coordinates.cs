@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace J_RPG
 {
-    [DataContract]
-    class Coordinates
+    
+    [DataContract][Table("Coordinates")]
+    public class Coordinates
     {
         /*#####################################################*/
         /*############                             ############*/
@@ -16,6 +19,8 @@ namespace J_RPG
         /*############                             ############*/
         /*#####################################################*/
 
+
+        public int ID { get; set; }
 
         protected int _abscissa;
         [DataMember]
@@ -40,6 +45,11 @@ namespace J_RPG
         {
             Abscissa = abscissa;
             Ordinate = ordinate;
+        }
+
+        public Coordinates()
+        {
+
         }
 
         public Coordinates(Coordinates coordinate)

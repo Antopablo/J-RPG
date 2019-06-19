@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,8 @@ namespace J_RPG
             Etat_Quete = etat_Quete;
         }
 
-        public int ID { get; set; }
+        [Key]
+        public int Key_Quete { get; set; }
 
         public int CompteurQuest { get; set; }
 

@@ -22,6 +22,8 @@ namespace J_RPG
             MapsDatas.Initialize();
             MapsDatas.CreateJsonMetadatas();
 
+            ApplicationDatabase Database = new ApplicationDatabase();
+
             // Insertion des données dans la base
             FabriquePersonnage Fabrique = new FabriquePersonnage();
             string playername;
@@ -39,7 +41,8 @@ namespace J_RPG
                 Console.WriteLine("Dans ce jeu, vous avez le choix de votre voie. Quelle sera-t-elle ?");
                 Console.WriteLine("Archer / Assassin / Chaman / Chevalier / Guerrier / Mage");
                 ClasseChoice = Console.ReadLine().ToUpper();
-                Fabrique.CreerPerso(ClasseChoice, playername);
+                Database.Characters.Add(Fabrique.CreerPerso(ClasseChoice, playername));
+                Database.SaveChanges();
                 Continue = true;
             }
             Console.WriteLine("Pour commencer l'aventure dans le merveilleux monde de Ifantasia, appuyer sur entrée");
